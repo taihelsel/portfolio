@@ -51,12 +51,11 @@ class HomeScreen extends Component {
         }
         box.style.width = size.w + "px";
         box.style.height = size.h + "px";
-        if (posDiff.x > 0) {
-            box.style.left = this.firstPos.x - posDiff.x + "px";
-        }
-        if (posDiff.y > 0) {
-            box.style.top = this.firstPos.y - posDiff.y + "px";
-        }
+        //all the fancy stuff to translate the box
+        if (posDiff.x > 0) box.style.left = this.firstPos.x - posDiff.x + "px";
+        else box.style.left = this.firstPos.x + "px";
+        if (posDiff.y > 0) box.style.top = this.firstPos.y - posDiff.y + "px";
+        else box.style.top = this.firstPos.y + "px";
     }
     render() {
         return (
