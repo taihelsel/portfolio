@@ -3,6 +3,7 @@
     height:96.70%;
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 #selectBox{
     border:1px solid #8db749;

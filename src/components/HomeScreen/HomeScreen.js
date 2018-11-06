@@ -16,7 +16,7 @@ class HomeScreen extends Component {
     }
     onMouseUp = (e) => {
         if (e.which === 1) {
-            try {
+            try { //cause JavaScript...
                 document.removeEventListener('mousemove', this.drawBox);
                 document.getElementById("selectBox").classList.add("hideBox");
             } catch{ };
@@ -32,20 +32,22 @@ class HomeScreen extends Component {
         }
     }
     drawBox = (e) => {
-        let secondPos = {
+        //doing extreme programmer math
+        let secondPos = { //will hold the currentPosition of cursor
             x: e.pageX,
             y: e.pageY
         }
-        let posDiff = {
+        let posDiff = { //difference between the starting point and current point.
             x: this.firstPos.x - secondPos.x,
             y: this.firstPos.y - secondPos.y,
         }
-        let size = {
+        let size = { //size of the box
             w: Math.abs(e.pageX - this.firstPos.x),
             h: Math.abs(e.pageY - this.firstPos.y)
         }
         let box = document.getElementById("selectBox");
         if (box === null) {
+            //drawing initial box
             box = document.createElement("div");
             box.id = "selectBox";
             box.style.width = "0px";
@@ -55,6 +57,7 @@ class HomeScreen extends Component {
             box.style.left = this.firstPos.x + "px";
             document.getElementById("HomeScreen").appendChild(box);
         }else{
+            //reseting an existing box
             box.classList.remove("hideBox");
             box.style.width = "0px";
             box.style.height = "0px";
@@ -62,9 +65,10 @@ class HomeScreen extends Component {
             box.style.top = this.firstPos.y + "px";
             box.style.left = this.firstPos.x + "px";
         }
+        //updating box size
         box.style.width = size.w + "px";
         box.style.height = size.h + "px";
-        //all the fancy stuff to translate the box
+        //update box position (all the fancy stuff to translate the box)
         if (posDiff.x > 0) box.style.left = this.firstPos.x - posDiff.x + "px";
         else box.style.left = this.firstPos.x + "px";
         if (posDiff.y > 0) box.style.top = this.firstPos.y - posDiff.y + "px";
@@ -73,7 +77,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
-
+            
             </div>
         );
     }
