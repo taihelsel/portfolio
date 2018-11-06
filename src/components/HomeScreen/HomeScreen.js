@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BackgroundImage from "../../media/background.jpg";
+import BackgroundImage from "../../media/background2.jpg";
 import './HomeScreen.css';
 
 class HomeScreen extends Component {

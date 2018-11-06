@@ -5,13 +5,13 @@
     background-position: center;
 }
 #selectBox{
-    border:1px solid yellowgreen;
+    border:1px solid #8db749;
     z-index:32390;
-    background-color:rgba(0, 0, 0, 0.4);
+    /* background-color:rgba(0, 0, 0, 0.4); */
+    background-color:rgba(163, 191, 135, 0.27);
 }
 .hideBox{
     animation: boxFadeOut 0.2s forwards ease;
-
 }
 
 @keyframes boxFadeOut{
