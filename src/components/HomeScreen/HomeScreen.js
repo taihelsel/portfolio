@@ -14,16 +14,22 @@ class HomeScreen extends Component {
         document.getElementById("HomeScreen").addEventListener("mouseup", this.onMouseUp);
         document.getElementById("HomeScreen").addEventListener("mousedown", this.onMouseDown);
     }
-    onMouseUp = () => {
-        document.removeEventListener('mousemove', this.drawBox);
-        document.getElementById("selectBox").remove();
+    onMouseUp = (e) => {
+        if (e.which === 1) {
+            try {
+                document.removeEventListener('mousemove', this.drawBox);
+                document.getElementById("selectBox").remove();
+            } catch{ };
+        }
     }
     onMouseDown = (e) => {
-        this.firstPos = {
-            x: e.pageX,
-            y: e.pageY
+        if (e.which === 1) {
+            this.firstPos = {
+                x: e.pageX,
+                y: e.pageY
+            }
+            document.addEventListener('mousemove', this.drawBox);
         }
-        document.addEventListener('mousemove', this.drawBox);
     }
     drawBox = (e) => {
         let secondPos = {
