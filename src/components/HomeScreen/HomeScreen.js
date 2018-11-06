@@ -18,7 +18,7 @@ class HomeScreen extends Component {
         if (e.which === 1) {
             try {
                 document.removeEventListener('mousemove', this.drawBox);
-                document.getElementById("selectBox").remove();
+                document.getElementById("selectBox").classList.add("hideBox");
             } catch{ };
         }
     }
@@ -54,6 +54,13 @@ class HomeScreen extends Component {
             box.style.top = this.firstPos.y + "px";
             box.style.left = this.firstPos.x + "px";
             document.getElementById("HomeScreen").appendChild(box);
+        }else{
+            box.classList.remove("hideBox");
+            box.style.width = "0px";
+            box.style.height = "0px";
+            box.style.position = "absolute";
+            box.style.top = this.firstPos.y + "px";
+            box.style.left = this.firstPos.x + "px";
         }
         box.style.width = size.w + "px";
         box.style.height = size.h + "px";

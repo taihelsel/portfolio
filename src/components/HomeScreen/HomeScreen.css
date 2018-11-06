@@ -9,3 +9,16 @@
     z-index:32390;
     background-color:rgba(0, 0, 0, 0.4);
 }
+.hideBox{
+    animation: boxFadeOut 0.2s forwards ease;
+
+}
+
+@keyframes boxFadeOut{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
