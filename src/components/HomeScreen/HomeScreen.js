@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import BackgroundImage from "../../media/background2.jpg";
 import './HomeScreen.css';
 
-import MediumIcon from "../MediumIcon/MediumIcon";
+import MediumIcon from "../MediumIcon/MediumIcon.js";
+import Explorer from "../Explorer/Explorer.js";
 class HomeScreen extends Component {
     constructor() {
         super();
@@ -87,6 +88,7 @@ class HomeScreen extends Component {
                     <MediumIcon />
                     <MediumIcon />
                 </div>
+                <Explorer />
             </div>
         );
     }
