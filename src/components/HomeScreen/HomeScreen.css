@@ -11,13 +11,14 @@
     background-color:rgba(163, 191, 135, 0.27);
 }
 .hideBox{
-    animation: boxFadeOut 0.2s forwards ease;
+    animation: boxFadeOut 0.55s forwards ease;
 }
 .shortcut-wrapper{
     height:90%;
     width:fit-content;
     margin: 0 0 0 75px;
     display: inline-block;
+    z-index: 5;
 }
 .shortcut-wrapper .medium-icon{
     margin:25px 0 25px 0;
@@ -26,7 +27,15 @@
     0%{
         opacity: 1;
     }
-    100%{
+    99%{
         opacity: 0;
+        width:unset;
+        height: unset;
+    }
+    100%{
+        border:none;
+        background-color:transparent;
+        width:0;
+        height:0;
     }
 }
