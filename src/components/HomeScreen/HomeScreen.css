@@ -13,7 +13,15 @@
 .hideBox{
     animation: boxFadeOut 0.2s forwards ease;
 }
-
+.shortcut-wrapper{
+    height:90%;
+    width:fit-content;
+    margin: 0 0 0 75px;
+    display: inline-block;
+}
+.shortcut-wrapper .medium-icon{
+    margin:25px 0 25px 0;
+}
 @keyframes boxFadeOut{
     0%{
         opacity: 1;

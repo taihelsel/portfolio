@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BackgroundImage from "../../media/background2.jpg";
 import './HomeScreen.css';
 
+import MediumIcon from "../MediumIcon/MediumIcon";
 class HomeScreen extends Component {
     constructor() {
         super();
@@ -56,7 +57,7 @@ class HomeScreen extends Component {
             box.style.top = this.firstPos.y + "px";
             box.style.left = this.firstPos.x + "px";
             document.getElementById("HomeScreen").appendChild(box);
-        }else{
+        } else {
             //reseting an existing box
             box.classList.remove("hideBox");
             box.style.width = "0px";
@@ -77,7 +78,15 @@ class HomeScreen extends Component {
     render() {
         return (
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
-            
+                <div className="shortcut-wrapper">
+                    <MediumIcon />
+                    <MediumIcon />
+                    <MediumIcon />
+                    <MediumIcon />
+                    <MediumIcon />
+                    <MediumIcon />
+                    <MediumIcon />
+                </div>
             </div>
         );
     }

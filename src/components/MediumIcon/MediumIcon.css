@@ -1,0 +1,22 @@
+.medium-icon{
+    text-align: center;
+    user-select: none;
+}
+.medium-icon img{
+    user-select: none;
+}
+.medium-icon h3{
+    color:white;
+    margin:0;
+    padding:0;
+    font-size:13px;
+    font-weight:400;
+    user-select: none;
+    padding:1px;
+}
+.medium-icon:hover img{
+    filter:brightness(125%);
+}
+.medium-icon:hover h3{
+    background-color:black;
+}
