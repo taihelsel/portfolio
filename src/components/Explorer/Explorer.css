@@ -63,39 +63,3 @@
     background-color:#75a030bf;
     width:fit-content;
 }
-.explorer-settings-dropdown{
-    margin:0;
-    padding: 5px 0px;
-    list-style: none;
-    background-color:white;
-    box-shadow: black 0px 0 15px -7px;
-    border:1px solid #00000021;
-    border-radius:1px;
-}
-.explorer-settings-dropdown li{
-    display:block;
-    font-size:11px;
-    padding:5px 0;
-}
-.explorer-settings-dropdown li:hover{
-    background-color:#75a030bf;
-}
-.explorer-settings-dropdown li:hover .explorer-settings-dropdown-title,.explorer-settings-dropdown li:hover .explorer-settings-dropdown-shortcut{
-    color:white;
-}
-.explorer-settings-dropdown-shortcut,.explorer-settings-dropdown-title{
-    margin:0;
-    padding:0;
-    font-weight:400;
-    display:inline-block;  
-}
-.explorer-settings-dropdown-title{
-    padding-left:25px;
-    color:#333333;
-}
-.explorer-settings-dropdown-shortcut{
-    float:right;
-    padding:0 7px 0 40px;
-    font-weight:lighter;
-    color:grey;
-}
