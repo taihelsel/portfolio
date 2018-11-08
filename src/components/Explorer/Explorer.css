@@ -1,0 +1,101 @@
+.explorer{
+    width:750px;
+    height:425px;
+    background-color:white;
+    box-shadow: #00000080 0px 2px 20px 2px;
+    position: absolute;
+    top:35%;
+    left:35%;
+    border-radius: 4px;
+    z-index: 15;
+}
+.explorer-head{
+    height: 90px;
+    position: relative;
+    background-color:#e0dfdf;
+    border-radius: 4px 4px 0 0;
+    user-select: none;
+}
+.explorer-controls{
+    margin:0;
+    padding:0;
+    list-style: none;
+    position: absolute;
+    right:0;
+    top:0;
+}
+.explorer-controls li{
+    color:#b9b9b9;
+    display:inline-block;
+    font-weight:bolder;
+    font-size:16px;
+    text-align:center;
+    padding:5px 5px;
+    margin:0 5px;
+    cursor:pointer;
+}
+.explorer-title{
+    margin:0;
+    padding:0;
+    text-align:center;
+    padding-top:10px;
+    font-weight: 500;
+    color:grey;
+    font-size:14px;
+}
+.explorer-settings{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.explorer-settings li{
+    display:inline-block;
+}
+.explorer-settings-label{
+    margin:0;
+    padding:0;
+    font-weight:lighter;
+    /* color:#4a4848; */
+    color:white;
+    font-size:13px;
+    letter-spacing:0.3px;
+    padding:7px;
+    background-color:#75a030bf;
+    width:fit-content;
+}
+.explorer-settings-dropdown{
+    margin:0;
+    padding: 5px 0px;
+    list-style: none;
+    background-color:white;
+    box-shadow: black 0px 0 15px -7px;
+    border:1px solid #00000021;
+    border-radius:1px;
+}
+.explorer-settings-dropdown li{
+    display:block;
+    font-size:11px;
+    padding:5px 0;
+}
+.explorer-settings-dropdown li:hover{
+    background-color:#75a030bf;
+}
+.explorer-settings-dropdown li:hover .explorer-settings-dropdown-title,.explorer-settings-dropdown li:hover .explorer-settings-dropdown-shortcut{
+    color:white;
+}
+.explorer-settings-dropdown-shortcut,.explorer-settings-dropdown-title{
+    margin:0;
+    padding:0;
+    font-weight:400;
+    display:inline-block;  
+}
+.explorer-settings-dropdown-title{
+    padding-left:25px;
+    color:#333333;
+}
+.explorer-settings-dropdown-shortcut{
+    float:right;
+    padding:0 7px 0 40px;
+    font-weight:lighter;
+    color:grey;
+}
