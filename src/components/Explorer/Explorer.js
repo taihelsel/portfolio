@@ -49,17 +49,43 @@ class Explorer extends Component {
       ],
       editDropdown: [
         {
-          title: "Settings menu todo",
+          title: "Select All",
+          shortcut: "Ctrl+A",
           handleClick: function () {
-            console.log("new edit todo clicked");
+            console.log("select all clicked");
+          }
+        },
+        {
+          title: "Invert Selection",
+          shortcut: "Shift+Ctrl+I",
+          handleClick: function () {
+            console.log("Invert Selection clicked");
           }
         },
       ],
-      viewDropdown: [
+      goDropdown: [
         {
-          title: "Settings menu todo",
+          title: "Home",
           handleClick: function () {
-            console.log("new view todo clicked");
+            console.log("Home clicked");
+          }
+        },
+        {
+          title: "Resume",
+          handleClick: function () {
+            console.log("Resume clicked");
+          }
+        },
+        {
+          title: "GitHub",
+          handleClick: function () {
+            console.log("GitHub clicked");
+          }
+        },
+        {
+          title: "LinkedIn",
+          handleClick: function () {
+            console.log("LinkedIn clicked");
           }
         },
       ],
@@ -92,7 +118,7 @@ class Explorer extends Component {
   }
   showDropDown = (e) => {
     if (e.currentTarget.classList.contains("explorer-settings-label-selected")) {
-      this.resetSettingsDropdown();      
+      this.resetSettingsDropdown();
       this.resetExplorerSettings();
     } else {
       this.resetExplorerSettings();
@@ -108,14 +134,22 @@ class Explorer extends Component {
       return <SettingsDropDown data={this.state[this.state.currentlyDisplayedDrop]} />
     }
   }
-  handleMin = () => {
+  handleExplorerMin = () => {
     console.log("minimize clicked");
   }
-  handleMax = () => {
+  handleExplorerMax = () => {
     console.log("maximize clicked");
   }
-  handleClose = () => {
-    console.log("close clicked");
+  handleExplorerClose = () => {
+    console.log("close clicked &#x25BC;");
+  }
+  handleSidebarClick = (e) => {
+    let icon = e.currentTarget.getElementsByClassName("explorer-sidebar-section-icon")[0];
+    if(icon.innerHTML === "\u25BA"){
+      icon.innerHTML = "\u25BC";
+    }else{
+      icon.innerHTML = "\u25BA";
+    }
   }
   render() {
     return (
@@ -123,9 +157,9 @@ class Explorer extends Component {
         <div className="explorer-head">
           <h3 className="explorer-title">actions</h3>
           <ul className="explorer-controls">
-            <li onClick={this.handleMin}>-</li>
-            <li onClick={this.handleMax}>+</li>
-            <li onClick={this.handleClose}>x</li>
+            <li onClick={this.handleExplorerMin}>-</li>
+            <li onClick={this.handleExplorerMax}>+</li>
+            <li onClick={this.handleExplorerClose}>x</li>
           </ul>
           <ul className="explorer-settings">
             <li>
@@ -137,12 +171,19 @@ class Explorer extends Component {
               {this.shouldDropdownRender("edit")}
             </li>
             <li>
-              <h3 className="explorer-settings-label" onClick={this.showDropDown}>View</h3>
-              {this.shouldDropdownRender("view")}
+              <h3 className="explorer-settings-label" onClick={this.showDropDown}>Go</h3>
+              {this.shouldDropdownRender("go")}
             </li>
             <li>
               <h3 className="explorer-settings-label" onClick={this.showDropDown}>Help</h3>
               {this.shouldDropdownRender("help")}
+            </li>
+          </ul>
+        </div>
+        <div className="explorer-body">
+          <ul className="explorer-sidebar">
+            <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
+              <h1><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1> 
             </li>
           </ul>
         </div>

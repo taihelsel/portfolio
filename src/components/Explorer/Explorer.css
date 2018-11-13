@@ -65,3 +65,43 @@
     color:white;
     background-color:#75a030bf;
 }
+.explorer-body{
+    width:100%;
+    height: calc(100% - 90px);
+    position: relative;
+}
+.explorer-sidebar{
+    width:175px;
+    height: 100%;
+    background-color:#403f3f;
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.explorer-sidebar-section{
+    padding:5px 0;
+}
+.explorer-sidebar-section:hover{
+    background-color:#a9a3a32e;
+}
+.explorer-sidebar-section h1{
+    margin:0;
+    padding:0;
+    font-size:13px;
+    font-weight:500;
+    color:lightgrey;
+    display:inline-block;
+    user-select: none;
+}
+.explorer-sidebar-section-icon{
+    margin:0;
+    padding:0 3px;
+    font-size:13px;
+    font-weight:500;
+    color:grey;
+    display:inline-block;
+    user-select: none;
+}
+.explorer-sidebar-section-icon:hover{
+    color:lightgrey;
+}
