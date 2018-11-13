@@ -8,7 +8,7 @@ class HomeScreen extends Component {
     constructor() {
         super();
         this.state = {
-            explorerWindows: [],
+            explorerWindows: {},
             homeFolders: [
                 {
                     name: "Projects",
@@ -19,7 +19,7 @@ class HomeScreen extends Component {
                                 {
                                     name: "html file",
                                     type: "html",
-                                    content:"testfilecontent"
+                                    content: "testfilecontent"
                                 },
                             ],
                             type: "folder",
@@ -36,7 +36,7 @@ class HomeScreen extends Component {
                                 {
                                     name: "asdf file",
                                     type: "text",
-                                    content:"testfilecontent"
+                                    content: "testfilecontent"
                                 },
                             ],
                             type: "folder",
@@ -47,7 +47,7 @@ class HomeScreen extends Component {
                                 {
                                     name: "asdfasdfasdfasdf file",
                                     type: "text",
-                                    content:"testfilecontent"
+                                    content: "testfilecontent"
                                 },
                             ],
                             type: "folder",
@@ -126,22 +126,39 @@ class HomeScreen extends Component {
         if (posDiff.y > 0) box.style.top = this.firstPos.y - posDiff.y + "px";
         else box.style.top = this.firstPos.y + "px";
     }
-    handleFolderClick = (e,name,data) => {
+    randomNum = () => {
+        return Math.floor(Math.random() * 256) + 1;
+    }
+    handleFolderClick = (e, name, data) => {
         let newExplorerWindow = this.state.explorerWindows;
-        newExplorerWindow.push(<Explorer data={data} name={name} />);
+        let newKey = this.randomNum();
+        if (typeof this.state.explorerWindows[newKey] !== "undefined") {
+            this.handleFolderClick(e, name, data);
+        } else {
+            newExplorerWindow[newKey] = <Explorer handleClose={this.handleExplorerClose} explorerKey={newKey} data={data} name={name} />;
+            this.setState({
+                explorerWindows: newExplorerWindow,
+            });
+        }
+    }
+    handleExplorerClose = (e, key) => {
+        let newExplorerWindow = this.state.explorerWindows;
+        delete newExplorerWindow[key];
         this.setState({
-            explorerWindows:newExplorerWindow,
+            explorerWindows: newExplorerWindow,
         });
     }
     render() {
         return (
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
-                    {this.state.homeFolders.map((x)=>{
+                    {this.state.homeFolders.map((x) => {
                         return <MediumIcon handleClick={this.handleFolderClick} data={x} />
                     })}
                 </div>
-                {this.state.explorerWindows.map((x)=>x)}
+                {Object.keys(this.state.explorerWindows).map((key) => {
+                    return this.state.explorerWindows[key];
+                })}
             </div>
         );
     }

@@ -143,8 +143,8 @@ class Explorer extends Component {
   handleExplorerMax = () => {
     console.log("maximize clicked");
   }
-  handleExplorerClose = () => {
-    console.log("close clicked &#x25BC;");
+  handleExplorerClose = (e) => {
+    this.props.handleClose(e,this.props.explorerKey);
   }
   handleSidebarClick = (e) => {
     let target = e.target;
