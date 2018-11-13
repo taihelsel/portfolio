@@ -144,11 +144,14 @@ class Explorer extends Component {
     console.log("close clicked &#x25BC;");
   }
   handleSidebarClick = (e) => {
+    let target = e.target;
     let icon = e.currentTarget.getElementsByClassName("explorer-sidebar-section-icon")[0];
-    if(icon.innerHTML === "\u25BA"){
+    if (icon.innerHTML === "\u25BA") {
       icon.innerHTML = "\u25BC";
-    }else{
+      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display="block";
+    } else if(target.classList.contains("explorer-sidebar-section-head")||target.classList.contains("explorer-sidebar-section-icon")) {
       icon.innerHTML = "\u25BA";
+      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display="none";
     }
   }
   render() {
@@ -183,7 +186,13 @@ class Explorer extends Component {
         <div className="explorer-body">
           <ul className="explorer-sidebar">
             <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
-              <h1><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1> 
+              <h1 className="explorer-sidebar-section-head"><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1>
+              <ul className="explorer-sidebar-items">
+                <li>Home</li>
+                <li>Desktop</li>
+                <li>Projects</li>
+                <li>Resume</li>
+              </ul>
             </li>
           </ul>
         </div>
