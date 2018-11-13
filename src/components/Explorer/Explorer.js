@@ -4,9 +4,11 @@ import './Explorer.css';
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import SettingsDropDown from "../SettingsDropDown/SettingsDropDown.js";
 class Explorer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      name:this.props.name,
+      data:this.props.data,
       fileDropdown: [
         {
           title: "New Tab",
@@ -156,12 +158,16 @@ class Explorer extends Component {
     }
   }
   handleFolderClick = (e,name,data) =>{
+    this.setState({
+      name:name,
+      data:data,
+    })
   }
   render() {
     return (
       <div className="explorer" onClick={this.handleExplorerClick}>
         <div className="explorer-head">
-          <h3 className="explorer-title">{this.props.name}</h3>
+          <h3 className="explorer-title">{this.state.name}</h3>
           <ul className="explorer-controls">
             <li onClick={this.handleExplorerMin}>-</li>
             <li onClick={this.handleExplorerMax}>+</li>
@@ -199,7 +205,7 @@ class Explorer extends Component {
             </li>
           </ul>
           <ul className="explorer-content">
-            {this.props.data.map((x) => {
+            {this.state.data.map((x) => {
               return <li><MediumIcon handleClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>

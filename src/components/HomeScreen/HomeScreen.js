@@ -18,7 +18,7 @@ class HomeScreen extends Component {
                             content: [
                                 {
                                     name: "html file",
-                                    type: "text",
+                                    type: "html",
                                     content:"testfilecontent"
                                 },
                             ],
