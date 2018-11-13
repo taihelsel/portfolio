@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Explorer.css';
 
+import MediumIcon from "../MediumIcon/MediumIcon.js";
 import SettingsDropDown from "../SettingsDropDown/SettingsDropDown.js";
 class Explorer extends Component {
   constructor() {
@@ -148,10 +149,10 @@ class Explorer extends Component {
     let icon = e.currentTarget.getElementsByClassName("explorer-sidebar-section-icon")[0];
     if (icon.innerHTML === "\u25BA") {
       icon.innerHTML = "\u25BC";
-      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display="block";
-    } else if(target.classList.contains("explorer-sidebar-section-head")||target.classList.contains("explorer-sidebar-section-icon")) {
+      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display = "block";
+    } else if (target.classList.contains("explorer-sidebar-section-head") || target.classList.contains("explorer-sidebar-section-icon")) {
       icon.innerHTML = "\u25BA";
-      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display="none";
+      e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display = "none";
     }
   }
   render() {
@@ -193,6 +194,56 @@ class Explorer extends Component {
                 <li>Projects</li>
                 <li>Resume</li>
               </ul>
+            </li>
+          </ul>
+          <ul className="explorer-content">
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
+            </li>
+            <li>
+              <MediumIcon />
             </li>
           </ul>
         </div>
