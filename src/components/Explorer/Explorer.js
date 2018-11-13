@@ -175,17 +175,19 @@ class Explorer extends Component {
   moveExplorer = (e) => {
     let explorerEl = document.getElementById("explorer" + this.props.explorerKey);
     let explorerElStyle = getComputedStyle(explorerEl);
-    let currentPos = {
+    let currentStyle = {
       x:parseFloat(explorerElStyle.getPropertyValue("left")),
       y:parseFloat(explorerElStyle.getPropertyValue("top")),
+      width:parseFloat(explorerElStyle.getPropertyValue("width")),
+      height:parseFloat(explorerElStyle.getPropertyValue("height")),
     }
-    if(this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentPos.x;
+    if(this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentStyle.x;
     let newX = e.pageX - this.firstMoveOffset;
     let newY = e.pageY;
-    if(newX>0){
+    if(newX>0&&currentStyle.width+newX<window.innerWidth){
       explorerEl.style.left = newX + "px";
     }
-    if(newY>0){
+    if(newY>0&&currentStyle.height+newY<window.innerHeight){
       explorerEl.style.top = newY + "px";
     }
   }
