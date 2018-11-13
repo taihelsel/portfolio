@@ -192,8 +192,8 @@ class Explorer extends Component {
   render() {
     return (
       <div id={"explorer" + this.props.explorerKey} className="explorer" onClick={this.handleExplorerClick}>
-        <div className="explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} >
-          <h3 className="explorer-title">{this.state.name}</h3>
+        <div className="explorer-head">
+          <h3 className="explorer-title"  onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
           <ul className="explorer-controls">
             <li onClick={this.handleExplorerMin}>-</li>
             <li onClick={this.handleExplorerMax}>+</li>
