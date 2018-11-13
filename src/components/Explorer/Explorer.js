@@ -7,8 +7,8 @@ class Explorer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:this.props.name,
-      data:this.props.data,
+      name: this.props.name,
+      data: this.props.data,
       fileDropdown: [
         {
           title: "New Tab",
@@ -100,9 +100,11 @@ class Explorer extends Component {
           }
         },
       ],
-      currentlyDisplayedDrop: null
+      currentlyDisplayedDrop: null,
     }
+    this.firstMoveOffset = null
   }
+
   resetExplorerSettings = () => {
     if (typeof document.getElementsByClassName("explorer-settings-label-selected")[0] !== "undefined") {
       document.getElementsByClassName("explorer-settings-label-selected")[0].classList.remove("explorer-settings-label-selected");
@@ -144,7 +146,7 @@ class Explorer extends Component {
     console.log("maximize clicked");
   }
   handleExplorerClose = (e) => {
-    this.props.handleClose(e,this.props.explorerKey);
+    this.props.handleClose(e, this.props.explorerKey);
   }
   handleSidebarClick = (e) => {
     let target = e.target;
@@ -157,15 +159,40 @@ class Explorer extends Component {
       e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display = "none";
     }
   }
-  handleFolderClick = (e,name,data) =>{
+  handleFolderClick = (e, name, data) => {
     this.setState({
-      name:name,
-      data:data,
+      name: name,
+      data: data,
     })
+  }
+  handleMouseUp = (e) => {
+    this.firstMoveOffset = null;
+    document.removeEventListener('mousemove', this.moveExplorer);
+  }
+  handleMouseDown = (e) => {
+    console.log("key","explorer" + this.props.explorerKey);
+    document.addEventListener('mousemove', this.moveExplorer);
+  }
+  moveExplorer = (e) => {
+    let explorerEl = document.getElementById("explorer" + this.props.explorerKey);
+    let explorerElStyle = getComputedStyle(explorerEl);
+    let currentPos = {
+      x:parseFloat(explorerElStyle.getPropertyValue("left")),
+      y:parseFloat(explorerElStyle.getPropertyValue("top")),
+    }
+    if(this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentPos.x;
+    let newX = e.pageX - this.firstMoveOffset;
+    let newY = e.pageY;
+    if(newX>0){
+      explorerEl.style.left = newX + "px";
+    }
+    if(newY>0){
+      explorerEl.style.top = newY + "px";
+    }
   }
   render() {
     return (
-      <div className="explorer" onClick={this.handleExplorerClick}>
+      <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
           <h3 className="explorer-title">{this.state.name}</h3>
           <ul className="explorer-controls">
