@@ -142,8 +142,8 @@ class HomeScreen extends Component {
         }
     }
     handleExplorerClose = (e, key) => {
-        let newExplorerWindow = this.state.explorerWindows;
-        delete newExplorerWindow[key];
+        let newExplorerWindow = {...this.state.explorerWindows};
+        newExplorerWindow[key] = undefined;
         this.setState({
             explorerWindows: newExplorerWindow,
         });

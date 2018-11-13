@@ -13,40 +13,40 @@ class Explorer extends Component {
         {
           title: "New Tab",
           shortcut: "Ctrl+T",
-          handleClick: function () {
+          handleClick: () => {
             console.log("new tab clicked");
           }
         },
         {
           title: "New Window",
           shortcut: "Ctrl+N",
-          handleClick: function () {
+          handleClick: () => {
             console.log("New Window clicked");
           }
         },
         {
           title: "Create New Folder",
           shortcut: "Shift+Ctrl+N",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Create New Folder clicked");
           }
         },
         {
           title: "Create New Document",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Create New Document clicked");
           }
         },
         {
           title: "Close All Windows",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Close All Windows clicked");
           }
         },
         {
           title: "Close",
-          handleClick: function () {
-            console.log("Close clicked");
+          handleClick: () => {
+            this.handleExplorerClose();
           }
         },
       ],
@@ -54,14 +54,14 @@ class Explorer extends Component {
         {
           title: "Select All",
           shortcut: "Ctrl+A",
-          handleClick: function () {
+          handleClick: () => {
             console.log("select all clicked");
           }
         },
         {
           title: "Invert Selection",
           shortcut: "Shift+Ctrl+I",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Invert Selection clicked");
           }
         },
@@ -69,25 +69,25 @@ class Explorer extends Component {
       goDropdown: [
         {
           title: "Home",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Home clicked");
           }
         },
         {
           title: "Resume",
-          handleClick: function () {
+          handleClick: () => {
             console.log("Resume clicked");
           }
         },
         {
           title: "GitHub",
-          handleClick: function () {
+          handleClick: () => {
             console.log("GitHub clicked");
           }
         },
         {
           title: "LinkedIn",
-          handleClick: function () {
+          handleClick: () => {
             console.log("LinkedIn clicked");
           }
         },
@@ -95,7 +95,7 @@ class Explorer extends Component {
       helpDropdown: [
         {
           title: "Settings menu todo",
-          handleClick: function () {
+          handleClick: () => {
             console.log("new help todo clicked");
           }
         },
@@ -176,18 +176,18 @@ class Explorer extends Component {
     let explorerEl = document.getElementById("explorer" + this.props.explorerKey);
     let explorerElStyle = getComputedStyle(explorerEl);
     let currentStyle = {
-      x:parseFloat(explorerElStyle.getPropertyValue("left")),
-      y:parseFloat(explorerElStyle.getPropertyValue("top")),
-      width:parseFloat(explorerElStyle.getPropertyValue("width")),
-      height:parseFloat(explorerElStyle.getPropertyValue("height")),
+      x: parseFloat(explorerElStyle.getPropertyValue("left")),
+      y: parseFloat(explorerElStyle.getPropertyValue("top")),
+      width: parseFloat(explorerElStyle.getPropertyValue("width")),
+      height: parseFloat(explorerElStyle.getPropertyValue("height")),
     }
-    if(this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentStyle.x;
+    if (this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentStyle.x;
     let newX = e.pageX - this.firstMoveOffset;
     let newY = e.pageY;
-    if(newX>0&&currentStyle.width+newX<window.innerWidth){
+    if (newX > 0 && currentStyle.width + newX < window.innerWidth) {
       explorerEl.style.left = newX + "px";
     }
-    if(newY>0&&currentStyle.height+newY<window.innerHeight){
+    if (newY > 0 && currentStyle.height + newY < window.innerHeight) {
       explorerEl.style.top = newY + "px";
     }
   }
@@ -195,7 +195,7 @@ class Explorer extends Component {
     return (
       <div id={"explorer" + this.props.explorerKey} className="explorer" onClick={this.handleExplorerClick}>
         <div className="explorer-head">
-          <h3 className="explorer-title"  onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
+          <h3 className="explorer-title" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
           <ul className="explorer-controls">
             <li onClick={this.handleExplorerMin}>-</li>
             <li onClick={this.handleExplorerMax}>+</li>
