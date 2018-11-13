@@ -170,7 +170,6 @@ class Explorer extends Component {
     document.removeEventListener('mousemove', this.moveExplorer);
   }
   handleMouseDown = (e) => {
-    console.log("key","explorer" + this.props.explorerKey);
     document.addEventListener('mousemove', this.moveExplorer);
   }
   moveExplorer = (e) => {
@@ -192,8 +191,8 @@ class Explorer extends Component {
   }
   render() {
     return (
-      <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} onClick={this.handleExplorerClick}>
-        <div className="explorer-head">
+      <div id={"explorer" + this.props.explorerKey} className="explorer" onClick={this.handleExplorerClick}>
+        <div className="explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} >
           <h3 className="explorer-title">{this.state.name}</h3>
           <ul className="explorer-controls">
             <li onClick={this.handleExplorerMin}>-</li>
