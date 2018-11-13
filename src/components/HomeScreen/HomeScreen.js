@@ -25,7 +25,7 @@ class HomeScreen extends Component {
         }
     }
     onMouseDown = (e) => {
-        if (e.which === 1) {
+        if (e.which === 1 && e.target.id === "HomeScreen") {
             this.firstPos = {
                 x: e.pageX,
                 y: e.pageY
@@ -80,9 +80,6 @@ class HomeScreen extends Component {
         return (
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
-                    <MediumIcon />
-                    <MediumIcon />
-                    <MediumIcon />
                     <MediumIcon />
                     <MediumIcon />
                     <MediumIcon />

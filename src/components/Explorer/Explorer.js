@@ -47,19 +47,66 @@ class Explorer extends Component {
           }
         },
       ],
-      currentlyDisplayedDrop:null
+      editDropdown: [
+        {
+          title: "Settings menu todo",
+          handleClick: function () {
+            console.log("new edit todo clicked");
+          }
+        },
+      ],
+      viewDropdown: [
+        {
+          title: "Settings menu todo",
+          handleClick: function () {
+            console.log("new view todo clicked");
+          }
+        },
+      ],
+      helpDropdown: [
+        {
+          title: "Settings menu todo",
+          handleClick: function () {
+            console.log("new help todo clicked");
+          }
+        },
+      ],
+      currentlyDisplayedDrop: null
     }
   }
-  dropDownShouldRender = () => {
-    if(this.state.currentlyDisplayedDrop !== null && typeof this.state.currentlyDisplayedDrop.length !== "undefined"){
-      return <SettingsDropDown data={this.state[this.state.currentlyDisplayedDrop]} />
+  resetExplorerSettings = () => {
+    if (typeof document.getElementsByClassName("explorer-settings-label-selected")[0] !== "undefined") {
+      document.getElementsByClassName("explorer-settings-label-selected")[0].classList.remove("explorer-settings-label-selected");
+    }
+  }
+  resetSettingsDropdown = () => {
+    this.setState({
+      currentlyDisplayedDrop: null,
+    });
+  }
+  handleExplorerClick = (e) => {
+    if (e.target.classList.contains("explorer-settings-label") !== true) {
+      this.resetSettingsDropdown();
+      this.resetExplorerSettings();
     }
   }
   showDropDown = (e) => {
-    const n  = e.currentTarget.innerText.toLowerCase() + "Dropdown";
-    this.setState({
-      currentlyDisplayedDrop:n
-    });
+    if (e.currentTarget.classList.contains("explorer-settings-label-selected")) {
+      this.resetSettingsDropdown();      
+      this.resetExplorerSettings();
+    } else {
+      this.resetExplorerSettings();
+      e.currentTarget.classList.add("explorer-settings-label-selected");
+      const n = e.currentTarget.innerText.toLowerCase() + "Dropdown";
+      this.setState({
+        currentlyDisplayedDrop: n
+      });
+    }
+  }
+  shouldDropdownRender = (x) => {
+    if (this.state.currentlyDisplayedDrop !== null && typeof this.state.currentlyDisplayedDrop.length !== "undefined" && this.state.currentlyDisplayedDrop === x + "Dropdown") {
+      return <SettingsDropDown data={this.state[this.state.currentlyDisplayedDrop]} />
+    }
   }
   handleMin = () => {
     console.log("minimize clicked");
@@ -72,7 +119,7 @@ class Explorer extends Component {
   }
   render() {
     return (
-      <div className="explorer">
+      <div className="explorer" onClick={this.handleExplorerClick}>
         <div className="explorer-head">
           <h3 className="explorer-title">actions</h3>
           <ul className="explorer-controls">
@@ -83,7 +130,19 @@ class Explorer extends Component {
           <ul className="explorer-settings">
             <li>
               <h3 className="explorer-settings-label" onClick={this.showDropDown}>File</h3>
-              {this.dropDownShouldRender()}
+              {this.shouldDropdownRender("file")}
+            </li>
+            <li>
+              <h3 className="explorer-settings-label" onClick={this.showDropDown}>Edit</h3>
+              {this.shouldDropdownRender("edit")}
+            </li>
+            <li>
+              <h3 className="explorer-settings-label" onClick={this.showDropDown}>View</h3>
+              {this.shouldDropdownRender("view")}
+            </li>
+            <li>
+              <h3 className="explorer-settings-label" onClick={this.showDropDown}>Help</h3>
+              {this.shouldDropdownRender("help")}
             </li>
           </ul>
         </div>
