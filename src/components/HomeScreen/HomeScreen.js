@@ -7,6 +7,56 @@ import Explorer from "../Explorer/Explorer.js";
 class HomeScreen extends Component {
     constructor() {
         super();
+        this.state = {
+            explorerWindows: [],
+            homeFolders: [
+                {
+                    name: "Projects",
+                    content: [
+                        {
+                            name: "Project1",
+                            content: [
+                                {
+                                    name: "html file",
+                                    type: "text",
+                                    content:"testfilecontent"
+                                },
+                            ],
+                            type: "folder",
+                        },
+                    ],
+                    type: "folder",
+                },
+                {
+                    name: "Test Stuff",
+                    content: [
+                        {
+                            name: "Testmefolder1",
+                            content: [
+                                {
+                                    name: "asdf file",
+                                    type: "text",
+                                    content:"testfilecontent"
+                                },
+                            ],
+                            type: "folder",
+                        },
+                        {
+                            name: "2foldertestme",
+                            content: [
+                                {
+                                    name: "asdfasdfasdfasdf file",
+                                    type: "text",
+                                    content:"testfilecontent"
+                                },
+                            ],
+                            type: "folder",
+                        },
+                    ],
+                    type: "folder",
+                },
+            ],
+        }
         this.firstPos = {
             x: 0,
             y: 0
@@ -76,16 +126,22 @@ class HomeScreen extends Component {
         if (posDiff.y > 0) box.style.top = this.firstPos.y - posDiff.y + "px";
         else box.style.top = this.firstPos.y + "px";
     }
+    handleFolderClick = (e,name,data) => {
+        let newExplorerWindow = this.state.explorerWindows;
+        newExplorerWindow.push(<Explorer data={data} name={name} />);
+        this.setState({
+            explorerWindows:newExplorerWindow,
+        });
+    }
     render() {
         return (
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
-                    <MediumIcon />
-                    <MediumIcon />
-                    <MediumIcon />
-                    <MediumIcon />
+                    {this.state.homeFolders.map((x)=>{
+                        return <MediumIcon handleClick={this.handleFolderClick} data={x} />
+                    })}
                 </div>
-                <Explorer />
+                {this.state.explorerWindows.map((x)=>x)}
             </div>
         );
     }

@@ -155,11 +155,13 @@ class Explorer extends Component {
       e.currentTarget.getElementsByClassName("explorer-sidebar-items")[0].style.display = "none";
     }
   }
+  handleFolderClick = (e,name,data) =>{
+  }
   render() {
     return (
       <div className="explorer" onClick={this.handleExplorerClick}>
         <div className="explorer-head">
-          <h3 className="explorer-title">actions</h3>
+          <h3 className="explorer-title">{this.props.name}</h3>
           <ul className="explorer-controls">
             <li onClick={this.handleExplorerMin}>-</li>
             <li onClick={this.handleExplorerMax}>+</li>
@@ -197,54 +199,9 @@ class Explorer extends Component {
             </li>
           </ul>
           <ul className="explorer-content">
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
-            <li>
-              <MediumIcon />
-            </li>
+            {this.props.data.map((x) => {
+              return <li><MediumIcon handleClick={this.handleFolderClick} data={x} /></li>
+            })}
           </ul>
         </div>
       </div>
