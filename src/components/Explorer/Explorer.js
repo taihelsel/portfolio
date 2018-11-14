@@ -39,15 +39,11 @@ class Explorer extends Component {
         },
         {
           title: "Close All Windows",
-          handleClick: () => {
-            console.log("Close All Windows clicked");
-          }
+          handleClick: this.props.closeAllExplorers,
         },
         {
           title: "Close",
-          handleClick: () => {
-            this.handleExplorerClose();
-          }
+          handleClick: this.handleExplorerClose,
         },
       ],
       editDropdown: [
@@ -104,11 +100,19 @@ class Explorer extends Component {
     }
     this.firstMoveOffset = null
   }
-
+  componentDidMount(){
+    this.setAsActiveExplorer();
+  }
   resetExplorerSettings = () => {
     if (typeof document.getElementsByClassName("explorer-settings-label-selected")[0] !== "undefined") {
       document.getElementsByClassName("explorer-settings-label-selected")[0].classList.remove("explorer-settings-label-selected");
     }
+  }
+  setAsActiveExplorer = () => {
+    try{
+      document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
+    }catch{}
+    document.getElementById("explorer" + this.props.explorerKey).classList.add("selected-explorer");
   }
   resetSettingsDropdown = () => {
     this.setState({
@@ -193,7 +197,7 @@ class Explorer extends Component {
   }
   render() {
     return (
-      <div id={"explorer" + this.props.explorerKey} className="explorer" onClick={this.handleExplorerClick}>
+      <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
           <h3 className="explorer-title" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
           <ul className="explorer-controls">
@@ -219,6 +223,14 @@ class Explorer extends Component {
               {this.shouldDropdownRender("help")}
             </li>
           </ul>
+          <div className="explorer-nav">
+            <div className="explorer-nav-disabled">
+              <img src={require("../.././media/icons/leftarrow.svg")} />
+            </div>
+            <div className="explorer-nav-disabled">
+              <img src={require("../.././media/icons/rightarrow.svg")} />
+            </div>
+          </div>
         </div>
         <div className="explorer-body">
           <ul className="explorer-sidebar">

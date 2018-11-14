@@ -10,6 +10,7 @@ class MediumIcon extends Component {
   }
   handleIconClick = (e) => {
     if (this.state.clickCount >= 1) {
+      console.log(this.state.clickCount);
       if (this.props.data.type === "folder") {
         this.props.handleClick(e, this.props.data.name, this.props.data.content);
       } else {
