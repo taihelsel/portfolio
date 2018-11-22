@@ -12,4 +12,8 @@
     height: 100%;
     box-sizing: border-box;
     margin: 0;
+    pointer-events: none;
+}
+.selected-explorer .pdf-viewer-content{
+    pointer-events: unset;
 }
