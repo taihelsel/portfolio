@@ -135,7 +135,7 @@ class HomeScreen extends Component {
         if (typeof this.state.explorerWindows[newKey] !== "undefined") {
             this.handleFolderClick(e, name, data);
         } else {
-            newExplorerWindow[newKey] = <Explorer closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} explorerKey={newKey} data={data} name={name} />;
+            newExplorerWindow[newKey] = <Explorer closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
             this.setState({
                 explorerWindows: newExplorerWindow,
             });

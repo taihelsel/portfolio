@@ -139,7 +139,7 @@ class Explorer extends Component {
     }
   }
   shouldDropdownRender = (x) => {
-    if (this.state.currentlyDisplayedDrop !== null && typeof this.state.currentlyDisplayedDrop.length !== "undefined" && this.state.currentlyDisplayedDrop === x + "Dropdown") {
+    if (this.state.currentlyDisplayedDrop !== null && typeof this.state.currentlyDisplayedDrop.length !== "undefined" && this.state.currentlyDisplayedDrop === x.toLowerCase() + "Dropdown") {
       return <SettingsDropDown data={this.state[this.state.currentlyDisplayedDrop]} />
     }
   }
