@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './TextViewer.css';
 
 class TextViewer extends Component {
+    constructor(){
+        super();
+        this.state = {};
+        this.firstMoveOffset = null;
+    }
     componentDidMount() {
         this.setAsActiveExplorer();
     }
