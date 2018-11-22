@@ -5,6 +5,7 @@ import './HomeScreen.css';
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
 import TextViewer from "../TextViewer/TextViewer.js";
+import ImageViewer from "../ImageViewer/ImageVIewer.js";
 import PDFViewer from "../PDFViewer/PDFViewer.js";
 import PopupModal from "../PopupModal/PopupModal.js";
 class HomeScreen extends Component {
@@ -15,52 +16,59 @@ class HomeScreen extends Component {
             textViewerWindows: {},
             fileOptionWindows: {},
             PDFViewerWindows: {},
+            imageViewerWindows: {},
             homeFolders: [
                 {
                     name: "Projects",
                     content: [
                         {
-                            name: "Project1",
+                            name: "KayT Portfolio",
                             content: [
-                                {
-                                    name: "html file",
-                                    type: "html",
-                                    content: "testfilecontent"
-                                },
-                            ],
-                            type: "folder",
-                        },
-                    ],
-                    type: "folder",
-                },
-                {
-                    name: "Test Stuff",
-                    content: [
-                        {
-                            name: "Testmefolder1",
-                            content: [
-                                {
-                                    name: "asdf file",
-                                    type: "text",
-                                    content: "testfilecontent"
-                                },
+                                { name: "Project Info", type: "text", content: `• Role - Front End Developer\r\n• Tech Used - JavaScript | HTML5 | CSS3` },
+                                { name: "Project Preview", type: "img", content: "kayt.gif" },
+                                { name: "Live Site", type: "html", content: "https://taihelsel.github.io/kayt-mockup/" },
+                                { name: "Project GitHub", type: "html", content: "https://github.com/taihelsel/kayt-mockup" },
                             ],
                             type: "folder",
                         },
                         {
-                            name: "2foldertestme",
+                            name: "CryptoApp",
                             content: [
-                                {
-                                    name: "Testmefolder1",
-                                    content: [
-                                        {
-                                            name: "asdf file",
-                                            type: "text",
-                                            content: "testfilecontent"
-                                        },
-                                    ],
-                                    type: "folder",
-                                },
+                                { name: "Project Info", type: "text", content: `• Role - Front End & Back End Developer\r\n• Tech Used - JavaScript | HTML5 | CSS3 | Bootstrap | EJS | NodeJS | Express | PostgreSQL | Sequelize` },
+                                { name: "Project Preview", type: "img", content: "cryptoapp.gif" },
+                                { name: "Database Outline", type: "img", content: "cryptoappdbstructure.png" },
+                                { name: "Live Site", type: "html", content: "https://cryptocurrencyalert.herokuapp.com/auth/signup" },
+                                { name: "Project GitHub", type: "html", content: "https://github.com/taihelsel/project2-cryptoApp" },
+                            ],
+                            type: "folder",
+                        },
+                        {
+                            name: "Restaurant Redesign",
+                            content: [
+                                { name: "Project Info", type: "text", content: `• Role - Front End Developer\r\n• Tech Used - JavaScript | HTML5 | CSS3` },
+                                { name: "Project Preview", type: "img", content: "restredesign.gif" },
+                                { name: "Live Site", type: "html", content: "https://taihelsel.github.io/restaurant-mockup/" },
+                                { name: "Project GitHub", type: "html", content: "https://github.com/taihelsel/restaurant-mockup" },
+                            ],
+                            type: "folder",
+                        },
+                        {
+                            name: "2048 Remake",
+                            content: [
+                                { name: "Project Info", type: "text", content: `• Role - Front End Developer\r\n• Tech Used - JavaScript | HTML5 | CSS3` },
+                                { name: "Project Preview", type: "img", content: "2048remake.gif" },
+                                { name: "Live Site", type: "html", content: "https://taihelsel.github.io/game-project-host/games/2048/index.html" },
+                                { name: "Project GitHub", type: "html", content: "https://github.com/taihelsel/game-project-host/tree/master/games/2048" },
+                            ],
+                            type: "folder",
+                        },
+                        {
+                            name: "Image Classifier",
+                            content: [
+                                { name: "Project Info", type: "text", content: `• Role - Front End Developer & Machine Learning Engineer\r\n• Tech Used - Docker | Python3 | Tensorflow | Django | Jinja2 | JavaScript | JQuery | HTML5 | CSS3 | Boostrap` },
+                                { name: "Project Preview", type: "img", content: "sfwclassifier.gif" },
+                                { name: "Live Site", type: "html", content: "https://sfw-nsfw-image-classifier.herokuapp.com/classify_image/classify/" },
+                                { name: "Project GitHub", type: "html", content: "https://github.com/taihelsel/image-classify-server" },
                             ],
                             type: "folder",
                         },
@@ -157,7 +165,7 @@ class HomeScreen extends Component {
         if (typeof this.state.explorerWindows[newKey] !== "undefined") {
             this.handleFolderClick(e, name, data);
         } else {
-            newExplorerWindow[newKey] = <Explorer handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
+            newExplorerWindow[newKey] = <Explorer handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleImageFileClick={this.handleImageFileClick} closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
             this.setState({
                 explorerWindows: newExplorerWindow,
             });
@@ -172,6 +180,18 @@ class HomeScreen extends Component {
             newTextViewerWindow[newKey] = <TextViewer handleClose={this.handleTextViewerClose} key={newKey} textViewerKey={newKey} data={data} name={name} />;
             this.setState({
                 textViewerWindows: newTextViewerWindow,
+            });
+        }
+    }
+    handleImageFileClick = (e, name, data) => {
+        let newImageViewerWindow = this.state.imageViewerWindows;
+        let newKey = this.randomNum();
+        if (typeof this.state.imageViewerWindows[newKey] !== "undefined") {
+            this.handleImageFileClick(e, name, data);
+        } else {
+            newImageViewerWindow[newKey] = <ImageViewer handleClose={this.handleImageViewerClose} key={newKey} imageViewerKey={newKey} data={data} name={name} />;
+            this.setState({
+                imageViewerWindows: newImageViewerWindow,
             });
         }
     }
@@ -213,6 +233,13 @@ class HomeScreen extends Component {
             textViewerWindows: newTextWindow,
         });
     }
+    handleImageViewerClose = (e, key) => {
+        let newImageWindow = { ...this.state.imageViewerWindows };
+        newImageWindow[key] = undefined;
+        this.setState({
+            imageViewerWindows: newImageWindow,
+        });
+    }
     handlePDFViewerClose = (e, key) => {
         let newPDFWindow = { ...this.state.PDFViewerWindows };
         newPDFWindow[key] = undefined;
@@ -241,6 +268,9 @@ class HomeScreen extends Component {
                 {Object.keys(this.state.textViewerWindows).map((key) => {
                     return this.state.textViewerWindows[key];
                 })}
+                {Object.keys(this.state.imageViewerWindows).map((key) => {
+                    return this.state.imageViewerWindows[key];
+                })}
                 {Object.keys(this.state.PDFViewerWindows).map((key) => {
                     return this.state.PDFViewerWindows[key];
                 })}
@@ -255,7 +285,7 @@ class HomeScreen extends Component {
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
                     {this.state.homeFolders.map((x) => {
-                        return <MediumIcon handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} />
+                        return <MediumIcon handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleImageFileClick={this.handleImageFileClick} handleFolderClick={this.handleFolderClick} data={x} />
                     })}
                 </div>
                 {this.renderAllWindows()}

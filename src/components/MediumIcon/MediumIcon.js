@@ -17,9 +17,15 @@ class MediumIcon extends Component {
         case "text":
           this.props.handleTextDocClick(e, this.props.data.name, this.props.data.content);
           break;
+        case "img":
+          this.props.handleImageFileClick(e, this.props.data.name, this.props.data.content);
+          break;
         case "text/pdf":
-          this.props.handleFileOption(e, this.props.data.name,this.props.data.content, "View file as", ["text","pdf"]);
-        break;
+          this.props.handleFileOption(e, this.props.data.name, this.props.data.content, "View file as", ["text", "pdf"]);
+          break;
+        case "html":
+          window.open(this.props.data.content);
+          break;
         default:
           console.log("need to handle other file types");
           break;
@@ -47,6 +53,9 @@ class MediumIcon extends Component {
         break;
       case "html":
         iconImg = require("../.././media/icons/html.png");
+        break;
+      case "img":
+        iconImg = require("../.././media/icons/img.png");
         break;
       default:
         iconImg = require("../.././media/icons/folder.png");

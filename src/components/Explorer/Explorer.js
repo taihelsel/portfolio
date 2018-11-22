@@ -181,6 +181,11 @@ class Explorer extends Component {
   handleTextDocClick = (e,name,data) => {
     this.props.handleTextDocClick(e,name,data);
   }
+  
+  handleImageFileClick = (e,name,data) => {
+    this.props.handleImageFileClick(e,name,data);
+  }
+
   handleMouseUp = (e) => {
     this.firstMoveOffset = null;
     document.removeEventListener('mousemove', this.moveExplorer);
@@ -304,7 +309,7 @@ class Explorer extends Component {
           </ul>
           <ul className="explorer-content">
             {this.state.data.map((x) => {
-              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
+              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleImageFileClick={this.handleImageFileClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>
