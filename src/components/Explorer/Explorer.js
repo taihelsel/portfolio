@@ -97,6 +97,8 @@ class Explorer extends Component {
         },
       ],
       currentlyDisplayedDrop: null,
+      backArrow:[],
+      forwardArrow:[]
     }
     this.firstMoveOffset = null
   }
@@ -164,7 +166,14 @@ class Explorer extends Component {
     }
   }
   handleFolderClick = (e, name, data) => {
+    let x = this.state.backArrow;
+    x.push({
+      name:this.state.name,
+      data:this.state.data
+    });
     this.setState({
+      backArrow:x,
+      forwardArrow:[],
       name: name,
       data: data,
     })
@@ -195,7 +204,56 @@ class Explorer extends Component {
       explorerEl.style.top = newY + "px";
     }
   }
+  handleBackArrowClick = (e) => {
+    //first check if empty
+    if(this.state.backArrow.length>0){
+      let newData = this.state.backArrow[this.state.backArrow.length-1];
+      //verify contents are not already being displayed
+      if(newData.data !== this.state.data || newData.name !== this.state.name){
+        //update data to be displayed and update back arrow history.
+        let newBackArrow = this.state.backArrow;
+        let newForwardArrow = this.state.forwardArrow;
+        newBackArrow.pop();
+        newForwardArrow.push({
+          name:this.state.name,
+          data:this.state.data
+        });
+        this.setState({
+          name:newData.name,
+          data:newData.data,
+          backArrow:newBackArrow,
+          forwardArrow:newForwardArrow
+        });
+      }
+    }
+  }
+  handleForwardArrowClick = (e) => {
+    //first check if empty
+    if(this.state.forwardArrow.length>0){
+      let newData = this.state.forwardArrow[this.state.forwardArrow.length-1];
+      //verify contents are not already being displayed
+      if(newData.data !== this.state.data || newData.name !== this.state.name){
+        //update data to be displayed and update forward arrow history
+        let newForwardArrow = this.state.forwardArrow;
+        let newBackArrow = this.state.backArrow;
+        newForwardArrow.pop();
+        newBackArrow.push({
+          name:this.state.name,
+          data:this.state.data
+        });
+        this.setState({
+          name:newData.name,
+          data:newData.data,
+          forwardArrow:newForwardArrow,
+          backArrow:newBackArrow
+        });
+      }
+    }
+  }
   render() {
+    console.log("FORWARD",this.state.forwardArrow);
+    console.log("BACK",this.state.backArrow);
+
     return (
       <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
@@ -224,10 +282,10 @@ class Explorer extends Component {
             </li>
           </ul>
           <div className="explorer-nav">
-            <div className="explorer-nav-disabled">
+            <div onClick={this.handleBackArrowClick} className={this.state.backArrow.length>0?"":"explorer-nav-disabled"}>
               <img src={require("../.././media/icons/leftarrow.svg")} />
             </div>
-            <div className="explorer-nav-disabled">
+            <div onClick={this.handleForwardArrowClick}  className={this.state.forwardArrow.length>0?"":"explorer-nav-disabled"}>
               <img src={require("../.././media/icons/rightarrow.svg")} />
             </div>
           </div>

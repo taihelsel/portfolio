@@ -45,9 +45,15 @@ class HomeScreen extends Component {
                             name: "2foldertestme",
                             content: [
                                 {
-                                    name: "asdfasdfasdfasdf file",
-                                    type: "text",
-                                    content: "testfilecontent"
+                                    name: "Testmefolder1",
+                                    content: [
+                                        {
+                                            name: "asdf file",
+                                            type: "text",
+                                            content: "testfilecontent"
+                                        },
+                                    ],
+                                    type: "folder",
                                 },
                             ],
                             type: "folder",
