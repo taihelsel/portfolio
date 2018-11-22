@@ -56,7 +56,7 @@ class PDFViewer extends Component {
                         <li onClick={this.handleExplorerClose}>x</li>
                     </ul>
                 </div>
-                <div className="pdf-viewer-body">
+                <div className="pdf-viewer-body" >
                     <embed className="pdf-viewer-content" src={this.props.data} />
                 </div>
             </div>

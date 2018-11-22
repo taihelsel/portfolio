@@ -70,7 +70,10 @@ class HomeScreen extends Component {
                 {
                     name: "Resume",
                     content: {
-                        text: "alskdjflkas;djf;lkasjdlk;fasl;kdfklj;ajskl;dkfljjklsadfkl;dsaljlfk;sda;jlkf",
+                        text: `
+                            TODO TEXT VERSION. pdf version available
+                        
+                        `,
                         pdf: "https://drive.google.com/file/d/1bM3kPdVRhv80zde3OtcBBCqlprn4rPN6/preview"
                     },
                     type: "text/pdf"
