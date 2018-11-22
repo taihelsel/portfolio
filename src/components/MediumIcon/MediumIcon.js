@@ -11,10 +11,16 @@ class MediumIcon extends Component {
   handleIconClick = (e) => {
     if (this.state.clickCount >= 1) {
       console.log(this.state.clickCount);
-      if (this.props.data.type === "folder") {
-        this.props.handleClick(e, this.props.data.name, this.props.data.content);
-      } else {
-        console.log("need to handle other file types");
+      switch(this.props.data.type){
+        case "folder":
+          this.props.handleFolderClick(e, this.props.data.name, this.props.data.content);
+        break;
+        case "text":
+          this.props.handleTextDocClick(e, this.props.data.name, this.props.data.content);
+        break;
+        default:
+          console.log("need to handle other file types");
+        break;
       }
       this.setState({ clickCount: 0 });
     } else {

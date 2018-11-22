@@ -178,6 +178,9 @@ class Explorer extends Component {
       data: data,
     })
   }
+  handleTextDocClick = (e,name,data) => {
+    this.props.handleTextDocClick(e,name,data);
+  }
   handleMouseUp = (e) => {
     this.firstMoveOffset = null;
     document.removeEventListener('mousemove', this.moveExplorer);
@@ -251,9 +254,6 @@ class Explorer extends Component {
     }
   }
   render() {
-    console.log("FORWARD",this.state.forwardArrow);
-    console.log("BACK",this.state.backArrow);
-
     return (
       <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
@@ -304,7 +304,7 @@ class Explorer extends Component {
           </ul>
           <ul className="explorer-content">
             {this.state.data.map((x) => {
-              return <li><MediumIcon handleClick={this.handleFolderClick} data={x} /></li>
+              return <li><MediumIcon handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>

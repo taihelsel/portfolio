@@ -4,6 +4,7 @@ import './HomeScreen.css';
 
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
+import TextViewer from "../TextViewer/TextViewer.js";
 class HomeScreen extends Component {
     constructor() {
         super();
@@ -62,6 +63,7 @@ class HomeScreen extends Component {
                     type: "folder",
                 },
             ],
+            textViewerWindows: [],
         }
         this.firstPos = {
             x: 0,
@@ -141,17 +143,37 @@ class HomeScreen extends Component {
         if (typeof this.state.explorerWindows[newKey] !== "undefined") {
             this.handleFolderClick(e, name, data);
         } else {
-            newExplorerWindow[newKey] = <Explorer closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
+            newExplorerWindow[newKey] = <Explorer handleTextDocClick={this.handleTextDocClick} closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
             this.setState({
                 explorerWindows: newExplorerWindow,
             });
         }
     }
+    handleTextDocClick = (e, name, data) => {
+        console.log("clicked");
+        let newTextViewerWindow = this.state.textViewerWindows;
+        let newKey = this.randomNum();
+        if (typeof this.state.textViewerWindows[newKey] !== "undefined") {
+            this.handleTextDocClick(e, name, data);
+        } else {
+            newTextViewerWindow[newKey] = <TextViewer handleClose={this.handleTextViewerClose} key={newKey} textViewerKey={newKey} data={data} name={name} />;
+            this.setState({
+                textViewerWindows: newTextViewerWindow,
+            });
+        }
+    }
     handleExplorerClose = (e, key) => {
-        let newExplorerWindow = {...this.state.explorerWindows};
+        let newExplorerWindow = { ...this.state.explorerWindows };
         newExplorerWindow[key] = undefined;
         this.setState({
             explorerWindows: newExplorerWindow,
+        });
+    }
+    handleTextViewerClose = (e, key) => {
+        let newTextWindow = { ...this.state.textViewerWindows };
+        newTextWindow[key] = undefined;
+        this.setState({
+            textViewerWindows: newTextWindow,
         });
     }
     closeAllExplorers = () => {
@@ -164,11 +186,14 @@ class HomeScreen extends Component {
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
                     {this.state.homeFolders.map((x) => {
-                        return <MediumIcon handleClick={this.handleFolderClick} data={x} />
+                        return <MediumIcon handleFolderClick={this.handleFolderClick} data={x} />
                     })}
                 </div>
                 {Object.keys(this.state.explorerWindows).map((key) => {
                     return this.state.explorerWindows[key];
+                })}
+                {Object.keys(this.state.textViewerWindows).map((key) => {
+                    return this.state.textViewerWindows[key];
                 })}
             </div>
         );
