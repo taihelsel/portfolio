@@ -57,7 +57,7 @@ class TextViewer extends Component {
                     </ul>
                 </div>
                 <div className="text-viewer-body">
-                    <p className="text-viewer-content">{this.props.data}</p>
+                    <pre className="text-viewer-content">{this.props.data}</pre>
                 </div>
             </div>
         );
