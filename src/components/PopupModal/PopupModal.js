@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './TextViewer.css';
+import './PopupModal.css';
 
-class TextViewer extends Component {
-    constructor(){
+class PopupModal extends Component {
+    constructor() {
         super();
         this.state = {};
         this.firstMoveOffset = null;
@@ -14,7 +14,7 @@ class TextViewer extends Component {
         try {
             document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
         } catch{ }
-        document.getElementById("text-viewer" + this.props.textViewerKey).classList.add("selected-explorer");
+        document.getElementById("popup-modal" + this.props.popupModalKey).classList.add("selected-explorer");
     }
     handleMouseUp = (e) => {
         this.firstMoveOffset = null;
@@ -24,7 +24,7 @@ class TextViewer extends Component {
         document.addEventListener('mousemove', this.moveExplorer);
     }
     moveExplorer = (e) => {
-        let explorerEl = document.getElementById("text-viewer" + this.props.textViewerKey);
+        let explorerEl = document.getElementById("popup-modal" + this.props.popupModalKey);
         let explorerElStyle = getComputedStyle(explorerEl);
         let currentStyle = {
             x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -43,25 +43,39 @@ class TextViewer extends Component {
         }
     }
     handleExplorerClose = (e) => {
-        this.props.handleClose(e, this.props.textViewerKey);
+        this.props.handleClose(e, this.props.popupModalKey);
+    }
+    handleOptionClick = (e) => {
+        let choice = e.currentTarget.innerText.toLowerCase();
+        switch (choice) {
+            case "pdf":
+                this.props.handlePDFDocClick(e, this.props.name, this.props.data[choice]);
+                break;
+            case "text":
+                this.props.handleTextDocClick(e, this.props.name, this.props.data[choice]);
+                break;
+        }
+        this.handleExplorerClose(null);
+
     }
     render() {
         return (
-            <div id={"text-viewer" + this.props.textViewerKey} className="text-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
-                <div className="text-viewer-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+            <div id={"popup-modal" + this.props.popupModalKey} className="popup-modal explorer" onMouseDown={this.setAsActiveExplorer} >
+                <div className="popup-modal-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                     <h3 className="explorer-title">{this.props.name}</h3>
                     <ul className="explorer-controls">
-                        <li onClick={this.handleExplorerMin}>-</li>
-                        <li onClick={this.handleExplorerMax}>+</li>
                         <li onClick={this.handleExplorerClose}>x</li>
                     </ul>
                 </div>
-                <div className="text-viewer-body">
-                    <p className="text-viewer-content">{this.props.data}</p>
+                <div className="popup-modal-body">
+                    <h1 className="popup-modal-question">{this.props.question}</h1>
+                    <ul className="popup-modal-options">
+                        {this.props.options.map(i => <li onClick={this.handleOptionClick}>{i}</li>)}
+                    </ul>
                 </div>
             </div>
         );
     }
 }
 
-export default TextViewer;
+export default PopupModal;

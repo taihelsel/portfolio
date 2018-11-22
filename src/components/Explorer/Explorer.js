@@ -304,7 +304,7 @@ class Explorer extends Component {
           </ul>
           <ul className="explorer-content">
             {this.state.data.map((x) => {
-              return <li><MediumIcon handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
+              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>

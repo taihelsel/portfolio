@@ -5,11 +5,16 @@ import './HomeScreen.css';
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
 import TextViewer from "../TextViewer/TextViewer.js";
+import PDFViewer from "../PDFViewer/PDFViewer.js";
+import PopupModal from "../PopupModal/PopupModal.js";
 class HomeScreen extends Component {
     constructor() {
         super();
         this.state = {
             explorerWindows: {},
+            textViewerWindows: {},
+            fileOptionWindows: {},
+            PDFViewerWindows: {},
             homeFolders: [
                 {
                     name: "Projects",
@@ -62,8 +67,16 @@ class HomeScreen extends Component {
                     ],
                     type: "folder",
                 },
+                {
+                    name: "Resume",
+                    content: {
+                        text: "alskdjflkas;djf;lkasjdlk;fasl;kdfklj;ajskl;dkfljjklsadfkl;dsaljlfk;sda;jlkf",
+                        pdf: "https://drive.google.com/file/d/1bM3kPdVRhv80zde3OtcBBCqlprn4rPN6/preview"
+                    },
+                    type: "text/pdf"
+                }
             ],
-            textViewerWindows: [],
+
         }
         this.firstPos = {
             x: 0,
@@ -71,6 +84,7 @@ class HomeScreen extends Component {
         }
     }
     componentDidMount() {
+        //adding listeners for the green box when you drag mouse
         document.getElementById("HomeScreen").addEventListener("mouseup", this.onMouseUp);
         document.getElementById("HomeScreen").addEventListener("mousedown", this.onMouseDown);
     }
@@ -143,14 +157,13 @@ class HomeScreen extends Component {
         if (typeof this.state.explorerWindows[newKey] !== "undefined") {
             this.handleFolderClick(e, name, data);
         } else {
-            newExplorerWindow[newKey] = <Explorer handleTextDocClick={this.handleTextDocClick} closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
+            newExplorerWindow[newKey] = <Explorer handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} closeAllExplorers={this.closeAllExplorers} handleClose={this.handleExplorerClose} key={newKey} explorerKey={newKey} data={data} name={name} />;
             this.setState({
                 explorerWindows: newExplorerWindow,
             });
         }
     }
     handleTextDocClick = (e, name, data) => {
-        console.log("clicked");
         let newTextViewerWindow = this.state.textViewerWindows;
         let newKey = this.randomNum();
         if (typeof this.state.textViewerWindows[newKey] !== "undefined") {
@@ -159,6 +172,30 @@ class HomeScreen extends Component {
             newTextViewerWindow[newKey] = <TextViewer handleClose={this.handleTextViewerClose} key={newKey} textViewerKey={newKey} data={data} name={name} />;
             this.setState({
                 textViewerWindows: newTextViewerWindow,
+            });
+        }
+    }
+    handlePDFDocClick = (e, name, data) => {
+        let newPDFViewerWindow = this.state.PDFViewerWindows;
+        let newKey = this.randomNum();
+        if (typeof this.state.PDFViewerWindows[newKey] !== "undefined") {
+            this.handlePDFDocClick(e, name, data);
+        } else {
+            newPDFViewerWindow[newKey] = <PDFViewer handleClose={this.handlePDFViewerClose} key={newKey} pdfViewerKey={newKey} data={data} name={name} />;
+            this.setState({
+                PDFViewerWindows: newPDFViewerWindow,
+            });
+        }
+    }
+    handleFileOption = (e, name, data, question, options) => {
+        let newFileOptionWindow = this.state.fileOptionWindows;
+        let newKey = this.randomNum();
+        if (typeof this.state.fileOptionWindows[newKey] !== "undefined") {
+            this.handleFileOption(e, name, data, question, options);
+        } else {
+            newFileOptionWindow[newKey] = <PopupModal handlePDFDocClick={this.handlePDFDocClick} handleTextDocClick={this.handleTextDocClick} handleClose={this.handleFileOptionClose} key={newKey} popupModalKey={newKey} name={name} data={data} options={options} question={question} />;
+            this.setState({
+                fileOptionWindows: newFileOptionWindow,
             });
         }
     }
@@ -176,25 +213,52 @@ class HomeScreen extends Component {
             textViewerWindows: newTextWindow,
         });
     }
+    handlePDFViewerClose = (e, key) => {
+        let newPDFWindow = { ...this.state.PDFViewerWindows };
+        newPDFWindow[key] = undefined;
+        this.setState({
+            PDFViewerWindows: newPDFWindow,
+        });
+    }
+    handleFileOptionClose = (e, key) => {
+        let newFileOptionWindow = { ...this.state.fileOptionWindows };
+        newFileOptionWindow[key] = undefined;
+        this.setState({
+            fileOptionWindows: newFileOptionWindow,
+        });
+    }
     closeAllExplorers = () => {
         this.setState({
             explorerWindows: {},
         });
     }
-    render() {
+    renderAllWindows = () => {
         return (
-            <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
-                <div className="shortcut-wrapper">
-                    {this.state.homeFolders.map((x) => {
-                        return <MediumIcon handleFolderClick={this.handleFolderClick} data={x} />
-                    })}
-                </div>
+            <div>
                 {Object.keys(this.state.explorerWindows).map((key) => {
                     return this.state.explorerWindows[key];
                 })}
                 {Object.keys(this.state.textViewerWindows).map((key) => {
                     return this.state.textViewerWindows[key];
                 })}
+                {Object.keys(this.state.PDFViewerWindows).map((key) => {
+                    return this.state.PDFViewerWindows[key];
+                })}
+                {Object.keys(this.state.fileOptionWindows).map((key) => {
+                    return this.state.fileOptionWindows[key];
+                })}
+            </div>
+        );
+    }
+    render() {
+        return (
+            <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+                <div className="shortcut-wrapper">
+                    {this.state.homeFolders.map((x) => {
+                        return <MediumIcon handleFileOption={this.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleFolderClick={this.handleFolderClick} data={x} />
+                    })}
+                </div>
+                {this.renderAllWindows()}
             </div>
         );
     }

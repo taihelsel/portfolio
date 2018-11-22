@@ -10,23 +10,24 @@ class MediumIcon extends Component {
   }
   handleIconClick = (e) => {
     if (this.state.clickCount >= 1) {
-      console.log(this.state.clickCount);
-      switch(this.props.data.type){
+      switch (this.props.data.type) {
         case "folder":
           this.props.handleFolderClick(e, this.props.data.name, this.props.data.content);
-        break;
+          break;
         case "text":
           this.props.handleTextDocClick(e, this.props.data.name, this.props.data.content);
+          break;
+        case "text/pdf":
+          this.props.handleFileOption(e, this.props.data.name,this.props.data.content, "View file as", ["text","pdf"]);
         break;
         default:
           console.log("need to handle other file types");
-        break;
+          break;
       }
       this.setState({ clickCount: 0 });
     } else {
       let newClickCount = this.state.clickCount;
       newClickCount++;
-      console.log(this.state.clickCount);
       this.setState({
         clickCount: newClickCount
       });
@@ -39,6 +40,9 @@ class MediumIcon extends Component {
         iconImg = require("../.././media/icons/folder.png");
         break;
       case "text":
+        iconImg = require("../.././media/icons/text.png");
+        break;
+      case "text/pdf":
         iconImg = require("../.././media/icons/text.png");
         break;
       case "html":
