@@ -1,7 +1,7 @@
 {
-  "main.css": "/anesthesia/static/css/main.006c992e.chunk.css",
-  "main.js": "/anesthesia/static/js/main.53f5552a.chunk.js",
-  "main.js.map": "/anesthesia/static/js/main.53f5552a.chunk.js.map",
+  "main.css": "/anesthesia/static/css/main.2b841499.chunk.css",
+  "main.js": "/anesthesia/static/js/main.aac421b5.chunk.js",
+  "main.js.map": "/anesthesia/static/js/main.aac421b5.chunk.js.map",
   "static/js/1.ed5a7db1.chunk.js": "/anesthesia/static/js/1.ed5a7db1.chunk.js",
   "static/js/1.ed5a7db1.chunk.js.map": "/anesthesia/static/js/1.ed5a7db1.chunk.js.map",
   "runtime~main.js": "/anesthesia/static/js/runtime~main.3c01d341.js",
@@ -10,8 +10,8 @@
   "static/media/rightarrow.svg": "/anesthesia/static/media/rightarrow.15cc8a49.svg",
   "static/media/chrome.png": "/anesthesia/static/media/chrome.0400f304.png",
   "static/media/leftarrow.svg": "/anesthesia/static/media/leftarrow.eb17f0a2.svg",
-  "static/css/main.006c992e.chunk.css.map": "/anesthesia/static/css/main.006c992e.chunk.css.map",
+  "static/css/main.2b841499.chunk.css.map": "/anesthesia/static/css/main.2b841499.chunk.css.map",
   "index.html": "/anesthesia/index.html",
-  "precache-manifest.2568b774dacde6d5e50950c87d3f3a21.js": "/anesthesia/precache-manifest.2568b774dacde6d5e50950c87d3f3a21.js",
+  "precache-manifest.c71463e0deb35bece6bfe229c68c59a9.js": "/anesthesia/precache-manifest.c71463e0deb35bece6bfe229c68c59a9.js",
   "service-worker.js": "/anesthesia/service-worker.js"
 }
