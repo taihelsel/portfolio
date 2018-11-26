@@ -4,7 +4,7 @@ import './HomeScreen.css';
 //Static Data
 import { HomeData } from "../../data/HomeData.js";
 //Generic Functions
-import { handleWindowClose, handleWindowOpen } from "../../handlers/componentHandlers.js";
+import { handleWindowClose, handleWindowOpen } from "../../handlers/windowHandlers.js";
 //ReactComponents
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
