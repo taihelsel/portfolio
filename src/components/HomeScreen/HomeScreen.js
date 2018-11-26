@@ -94,57 +94,17 @@ class HomeScreen extends Component {
         else box.style.top = this.firstPos.y + "px";
     }
     //handle new windows
-    handleFolderClick = (e, name, data) => {
-        this.setState({
-            explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handleFileOption: this.handleFileOption, handleTextDocClick: this.handleTextDocClick, handleImageFileClick: this.handleImageFileClick, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })
-        });
-    }
-    handleTextDocClick = (e, name, data) => {
-        this.setState({
-            textViewerWindows: handleWindowOpen(e, name, data, { ...this.state.textViewerWindows }, <TextViewer />, { handleClose: this.handleTextViewerClose })
-        });
-    }
-    handleImageFileClick = (e, name, data) => {
-        this.setState({
-            imageViewerWindows: handleWindowOpen(e, name, data, { ...this.state.imageViewerWindows }, <ImageViewer />, { handleClose: this.handleImageViewerClose })
-        });
-    }
-    handlePDFDocClick = (e, name, data) => {
-        this.setState({
-            PDFViewerWindows: handleWindowOpen(e, name, data, { ...this.state.PDFViewerWindows }, <PDFViewer />, { handleClose: this.handlePDFViewerClose })
-        });
-    }
-    handleFileOption = (e, name, data, question, options) => {
-        this.setState({
-            fileOptionWindows: handleWindowOpen(e, name, data, { ...this.state.fileOptionWindows }, <PopupModal />, { handlePDFDocClick: this.handlePDFDocClick, handleTextDocClick: this.handleTextDocClick, handleClose: this.handleFileOptionClose, options: options, question: question })
-        });
-    }
+    handleFolderClick = (e, name, data) => this.setState({explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handleFileOption: this.handleFileOption, handleTextDocClick: this.handleTextDocClick, handleImageFileClick: this.handleImageFileClick, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })});
+    handleTextDocClick = (e, name, data) => this.setState({textViewerWindows: handleWindowOpen(e, name, data, { ...this.state.textViewerWindows }, <TextViewer />, { handleClose: this.handleTextViewerClose })});
+    handleImageFileClick = (e, name, data) => this.setState({ imageViewerWindows: handleWindowOpen(e, name, data, { ...this.state.imageViewerWindows }, <ImageViewer />, { handleClose: this.handleImageViewerClose }) });
+    handlePDFDocClick = (e, name, data) => this.setState({ PDFViewerWindows: handleWindowOpen(e, name, data, { ...this.state.PDFViewerWindows }, <PDFViewer />, { handleClose: this.handlePDFViewerClose })});
+    handleFileOption = (e, name, data, question, options) => this.setState({ fileOptionWindows: handleWindowOpen(e, name, data, { ...this.state.fileOptionWindows }, <PopupModal />, { handlePDFDocClick: this.handlePDFDocClick, handleTextDocClick: this.handleTextDocClick, handleClose: this.handleFileOptionClose, options: options, question: question })});
     //handle closing old windows
-    handleExplorerClose = (e, key) => {
-        this.setState({
-            explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows }),
-        });
-    }
-    handleTextViewerClose = (e, key) => {
-        this.setState({
-            textViewerWindows: handleWindowClose(e, key, { ...this.state.textViewerWindows }),
-        });
-    }
-    handleImageViewerClose = (e, key) => {
-        this.setState({
-            imageViewerWindows: handleWindowClose(e, key, { ...this.state.imageViewerWindows }),
-        });
-    }
-    handlePDFViewerClose = (e, key) => {
-        this.setState({
-            PDFViewerWindows: handleWindowClose(e, key, { ...this.state.PDFViewerWindows }),
-        });
-    }
-    handleFileOptionClose = (e, key) => {
-        this.setState({
-            fileOptionWindows: handleWindowClose(e, key, { ...this.state.fileOptionWindows }),
-        });
-    }
+    handleExplorerClose = (e, key) => this.setState({explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows })});
+    handleTextViewerClose = (e, key) => this.setState({textViewerWindows: handleWindowClose(e, key, { ...this.state.textViewerWindows })});
+    handleImageViewerClose = (e, key) => this.setState({imageViewerWindows: handleWindowClose(e, key, { ...this.state.imageViewerWindows })});
+    handlePDFViewerClose = (e, key) =>  this.setState({PDFViewerWindows: handleWindowClose(e, key, { ...this.state.PDFViewerWindows })});
+    handleFileOptionClose = (e, key) => this.setState({ fileOptionWindows: handleWindowClose(e, key, { ...this.state.fileOptionWindows })});
     closeAllExplorers = () => this.setState({ explorerWindows: {} });
 
     renderAllWindows = () => {
