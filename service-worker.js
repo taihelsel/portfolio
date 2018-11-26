@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/anesthesia/precache-manifest.a8572744c65307880e978c7b4497e3a9.js"
+  "/anesthesia/precache-manifest.7c5b51ddf7e0f592dbdb8c0e82f9c098.js"
 );
 
 workbox.clientsClaim();
