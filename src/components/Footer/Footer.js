@@ -14,10 +14,7 @@ class Footer extends Component {
             <img className="nav-item-icon" src={require("../.././media/icons/user-desktop.png")} alt="Desktop shortcut" />
           </li>
           <li className="nav-item">
-            <img className="nav-item-app-icon" src={require("../.././media/icons/chrome.png")} alt="Google Chrome Logo" />
-          </li>
-          <li className="nav-item">
-            <img className="nav-item-app-icon" src={require("../.././media/icons/folder.png")} alt="Google Chrome Logo" />
+            <img className="nav-item-app-icon" src={require("../.././media/icons/folder.png")} alt="Folder Logo" />
           </li>
         </ul>
       </div>
