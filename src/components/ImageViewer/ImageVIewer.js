@@ -14,7 +14,7 @@ class ImageViewer extends Component {
         try {
             document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
         } catch{ }
-        document.getElementById("image-viewer" + this.props.imageViewerKey).classList.add("selected-explorer");
+        document.getElementById("image-viewer" + this.props.uniqueKey).classList.add("selected-explorer");
     }
     handleMouseUp = (e) => {
         this.firstMoveOffset = null;
@@ -24,7 +24,7 @@ class ImageViewer extends Component {
         document.addEventListener('mousemove', this.moveExplorer);
     }
     moveExplorer = (e) => {
-        let explorerEl = document.getElementById("image-viewer" + this.props.imageViewerKey);
+        let explorerEl = document.getElementById("image-viewer" + this.props.uniqueKey);
         let explorerElStyle = getComputedStyle(explorerEl);
         let currentStyle = {
             x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -43,11 +43,11 @@ class ImageViewer extends Component {
         }
     }
     handleExplorerClose = (e) => {
-        this.props.handleClose(e, this.props.imageViewerKey);
+        this.props.handleClose(e, this.props.uniqueKey);
     }
     render() {
         return (
-            <div id={"image-viewer" + this.props.imageViewerKey} className="image-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
+            <div id={"image-viewer" + this.props.uniqueKey} className="image-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
                 <div className="image-viewer-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                     <h3 className="explorer-title">{this.props.name}</h3>
                     <ul className="explorer-controls">

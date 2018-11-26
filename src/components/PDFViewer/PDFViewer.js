@@ -14,7 +14,7 @@ class PDFViewer extends Component {
         try {
             document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
         } catch{ }
-        document.getElementById("pdf-viewer" + this.props.pdfViewerKey).classList.add("selected-explorer");
+        document.getElementById("pdf-viewer" + this.props.uniqueKey).classList.add("selected-explorer");
     }
     handleMouseUp = (e) => {
         this.firstMoveOffset = null;
@@ -24,7 +24,7 @@ class PDFViewer extends Component {
         document.addEventListener('mousemove', this.moveExplorer);
     }
     moveExplorer = (e) => {
-        let explorerEl = document.getElementById("pdf-viewer" + this.props.pdfViewerKey);
+        let explorerEl = document.getElementById("pdf-viewer" + this.props.uniqueKey);
         let explorerElStyle = getComputedStyle(explorerEl);
         let currentStyle = {
             x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -43,11 +43,11 @@ class PDFViewer extends Component {
         }
     }
     handleExplorerClose = (e) => {
-        this.props.handleClose(e, this.props.pdfViewerKey);
+        this.props.handleClose(e, this.props.uniqueKey);
     }
     render() {
         return (
-            <div id={"pdf-viewer" + this.props.pdfViewerKey} className="pdf-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
+            <div id={"pdf-viewer" + this.props.uniqueKey} className="pdf-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
                 <div className="pdf-viewer-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                     <h3 className="explorer-title">{this.props.name}</h3>
                     <ul className="explorer-controls">

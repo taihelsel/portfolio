@@ -14,7 +14,7 @@ class TextViewer extends Component {
         try {
             document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
         } catch{ }
-        document.getElementById("text-viewer" + this.props.textViewerKey).classList.add("selected-explorer");
+        document.getElementById("text-viewer" + this.props.uniqueKey).classList.add("selected-explorer");
     }
     handleMouseUp = (e) => {
         this.firstMoveOffset = null;
@@ -24,7 +24,7 @@ class TextViewer extends Component {
         document.addEventListener('mousemove', this.moveExplorer);
     }
     moveExplorer = (e) => {
-        let explorerEl = document.getElementById("text-viewer" + this.props.textViewerKey);
+        let explorerEl = document.getElementById("text-viewer" + this.props.uniqueKey);
         let explorerElStyle = getComputedStyle(explorerEl);
         let currentStyle = {
             x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -43,11 +43,11 @@ class TextViewer extends Component {
         }
     }
     handleExplorerClose = (e) => {
-        this.props.handleClose(e, this.props.textViewerKey);
+        this.props.handleClose(e, this.props.uniqueKey);
     }
     render() {
         return (
-            <div id={"text-viewer" + this.props.textViewerKey} className="text-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
+            <div id={"text-viewer" + this.props.uniqueKey} className="text-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
                 <div className="text-viewer-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                     <h3 className="explorer-title">{this.props.name}</h3>
                     <ul className="explorer-controls">

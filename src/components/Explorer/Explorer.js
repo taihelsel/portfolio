@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './Explorer.css';
 
+//Static Data
+import {HomeData} from "../../data/HomeData.js";
+
+//React Components
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import SettingsDropDown from "../SettingsDropDown/SettingsDropDown.js";
 class Explorer extends Component {
@@ -64,9 +68,14 @@ class Explorer extends Component {
       ],
       goDropdown: [
         {
-          title: "Home",
+          title: "Desktop",
           handleClick: () => {
-            console.log("Home clicked");
+            this.setState({
+              data:HomeData,
+              name:"Desktop",
+              backArrow:[],
+              forwardArrow:[],
+            })
           }
         },
         {
@@ -114,7 +123,7 @@ class Explorer extends Component {
     try{
       document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
     }catch{}
-    document.getElementById("explorer" + this.props.explorerKey).classList.add("selected-explorer");
+    document.getElementById("explorer" + this.props.uniqueKey).classList.add("selected-explorer");
   }
   resetSettingsDropdown = () => {
     this.setState({
@@ -152,7 +161,7 @@ class Explorer extends Component {
     console.log("maximize clicked");
   }
   handleExplorerClose = (e) => {
-    this.props.handleClose(e, this.props.explorerKey);
+    this.props.handleClose(e, this.props.uniqueKey);
   }
   handleSidebarClick = (e) => {
     let target = e.target;
@@ -194,7 +203,7 @@ class Explorer extends Component {
     document.addEventListener('mousemove', this.moveExplorer);
   }
   moveExplorer = (e) => {
-    let explorerEl = document.getElementById("explorer" + this.props.explorerKey);
+    let explorerEl = document.getElementById("explorer" + this.props.uniqueKey);
     let explorerElStyle = getComputedStyle(explorerEl);
     let currentStyle = {
       x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -260,7 +269,7 @@ class Explorer extends Component {
   }
   render() {
     return (
-      <div id={"explorer" + this.props.explorerKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
+      <div id={"explorer" + this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
           <h3 className="explorer-title" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
           <ul className="explorer-controls">
@@ -300,10 +309,10 @@ class Explorer extends Component {
             <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
               <h1 className="explorer-sidebar-section-head"><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1>
               <ul className="explorer-sidebar-items">
-                <li>Home</li>
                 <li>Desktop</li>
                 <li>Projects</li>
                 <li>Resume</li>
+                <li>LinkedIn</li>
               </ul>
             </li>
           </ul>

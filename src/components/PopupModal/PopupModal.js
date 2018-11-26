@@ -14,7 +14,7 @@ class PopupModal extends Component {
         try {
             document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
         } catch{ }
-        document.getElementById("popup-modal" + this.props.popupModalKey).classList.add("selected-explorer");
+        document.getElementById("popup-modal" + this.props.uniqueKey).classList.add("selected-explorer");
     }
     handleMouseUp = (e) => {
         this.firstMoveOffset = null;
@@ -24,7 +24,7 @@ class PopupModal extends Component {
         document.addEventListener('mousemove', this.moveExplorer);
     }
     moveExplorer = (e) => {
-        let explorerEl = document.getElementById("popup-modal" + this.props.popupModalKey);
+        let explorerEl = document.getElementById("popup-modal" + this.props.uniqueKey);
         let explorerElStyle = getComputedStyle(explorerEl);
         let currentStyle = {
             x: parseFloat(explorerElStyle.getPropertyValue("left")),
@@ -43,7 +43,7 @@ class PopupModal extends Component {
         }
     }
     handleExplorerClose = (e) => {
-        this.props.handleClose(e, this.props.popupModalKey);
+        this.props.handleClose(e, this.props.uniqueKey);
     }
     handleOptionClick = (e) => {
         let choice = e.currentTarget.innerText.toLowerCase();
@@ -60,7 +60,7 @@ class PopupModal extends Component {
     }
     render() {
         return (
-            <div id={"popup-modal" + this.props.popupModalKey} className="popup-modal explorer" onMouseDown={this.setAsActiveExplorer} >
+            <div id={"popup-modal" + this.props.uniqueKey} className="popup-modal explorer" onMouseDown={this.setAsActiveExplorer} >
                 <div className="popup-modal-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                     <h3 className="explorer-title">{this.props.name}</h3>
                     <ul className="explorer-controls">
