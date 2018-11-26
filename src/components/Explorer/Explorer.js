@@ -234,7 +234,7 @@ class Explorer extends Component {
   }
   renderDesktop = () => this.setState({ data: HomeData, name: "Desktop", backArrow: [], forwardArrow: [], });
   renderProjects = () => this.setState({ data: HomeData[0].content, name: "Projects", backArrow: [], forwardArrow: [] });
-  renderResume = () => this.props.handleFileOption(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
+  renderResume = () => this.props.handlePopupModal(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
   renderLinkedIn = () => window.open("https://www.linkedin.com/in/taihelsel/");
   renderGitHub = () => window.open("https://github.com/taihelsel");
   render() {
@@ -289,7 +289,7 @@ class Explorer extends Component {
           </ul>
           <ul className="explorer-content">
             {this.state.data.map((x) => {
-              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
+              return <li><MediumIcon handlePopupModal={this.props.handlePopupModal} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>
