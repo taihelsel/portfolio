@@ -52,8 +52,6 @@ class HomeScreen extends Component {
     handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question })});
     //handle closing old windows
     handleExplorerClose = (e, key) => this.setState({explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows })});
-    handleTextViewerClose = (e, key) => this.setState({textViewerWindows: handleWindowClose(e, key, { ...this.state.textViewerWindows })});
-    handleImageViewerClose = (e, key) => this.setState({imageViewerWindows: handleWindowClose(e, key, { ...this.state.imageViewerWindows })});
     handleFileViewerClose = (e, key) =>  this.setState({fileViewerWindows: handleWindowClose(e, key, { ...this.state.fileViewerWindows })});
     handlePopupModalClose = (e, key) => this.setState({ popupModalWindows: handleWindowClose(e, key, { ...this.state.popupModalWindows })});
     closeAllExplorers = () => this.setState({ explorerWindows: {} });
