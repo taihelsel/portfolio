@@ -47,7 +47,7 @@ class HomeScreen extends Component {
     }
     handleDrawBox = (e) => drawBox(e,"HomeScreen",this.firstPos);
     //handle new windows
-    handleFolderClick = (e, name, data) => this.setState({explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen:this.handleFileViewerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })});
+    handleExplorerOpen = (e, name, data) => this.setState({explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen:this.handleFileViewerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })});
     handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose,type:type })});
     handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question })});
     //handle closing old windows
@@ -70,7 +70,7 @@ class HomeScreen extends Component {
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                 <div className="shortcut-wrapper">
                     {this.state.homeFolders.map((x) => {
-                        return <MediumIcon handlePopupModal={this.handlePopupModal} handleFileViewerOpen={this.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} />
+                        return <MediumIcon handlePopupModal={this.handlePopupModal} handleFileViewerOpen={this.handleFileViewerOpen} handleFolderClick={this.handleExplorerOpen} data={x} />
                     })}
                 </div>
                 {this.renderAllWindows()}
