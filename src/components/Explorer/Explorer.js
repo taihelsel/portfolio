@@ -69,32 +69,19 @@ class Explorer extends Component {
       goDropdown: [
         {
           title: "Desktop",
-          handleClick: () => {
-            this.setState({
-              data:HomeData,
-              name:"Desktop",
-              backArrow:[],
-              forwardArrow:[],
-            })
-          }
+          handleClick: () => this.renderDesktop(),
         },
         {
           title: "Resume",
-          handleClick: () => {
-            console.log("Resume clicked");
-          }
+          handleClick: () => this.renderResume(),
         },
         {
           title: "GitHub",
-          handleClick: () => {
-            console.log("GitHub clicked");
-          }
+          handleClick: () => this.renderGitHub(),
         },
         {
           title: "LinkedIn",
-          handleClick: () => {
-            console.log("LinkedIn clicked");
-          }
+          handleClick: () => this.renderLinkedIn(),
         },
       ],
       helpDropdown: [
@@ -267,6 +254,11 @@ class Explorer extends Component {
       }
     }
   }
+  renderDesktop = () => this.setState({ data:HomeData,name:"Desktop",backArrow:[],forwardArrow:[],});
+  renderProjects = ()=> this.setState({data:HomeData[0].content,name:"Projects",backArrow:[],forwardArrow:[]});
+  renderResume = () => this.props.handleFileOption(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
+  renderLinkedIn = () => window.open("https://www.linkedin.com/in/taihelsel/");
+  renderGitHub = () => window.open("https://github.com/taihelsel");
   render() {
     return (
       <div id={"explorer" + this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
@@ -309,10 +301,11 @@ class Explorer extends Component {
             <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
               <h1 className="explorer-sidebar-section-head"><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1>
               <ul className="explorer-sidebar-items">
-                <li>Desktop</li>
-                <li>Projects</li>
-                <li>Resume</li>
-                <li>LinkedIn</li>
+                <li onClick={this.renderDesktop} >Desktop</li>
+                <li onClick={this.renderProjects} >Projects</li>
+                <li onClick={this.renderResume} >Resume</li>
+                <li onClick={this.renderGitHub} >GitHub</li>
+                <li onClick={this.renderLinkedIn} >LinkedIn</li>
               </ul>
             </li>
           </ul>

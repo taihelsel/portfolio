@@ -49,7 +49,7 @@ class TextViewer extends Component {
         return (
             <div id={"text-viewer" + this.props.uniqueKey} className="text-viewer explorer" onMouseDown={this.setAsActiveExplorer} >
                 <div className="text-viewer-head explorer-head" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
-                    <h3 className="explorer-title">{this.props.name}</h3>
+                    <h3 className="explorer-title">{this.props.name+".txt"}</h3>
                     <ul className="explorer-controls">
                         <li onClick={this.handleExplorerMin}>-</li>
                         <li onClick={this.handleExplorerMax}>+</li>
