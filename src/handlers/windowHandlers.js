@@ -14,12 +14,34 @@ export let handleWindowOpen = (e, name, data, currentState, component, props) =>
     let newUniqueKey = name + newKey;
     if (typeof currentState[newUniqueKey] !== "undefined") {
         return handleWindowOpen(e, name, data, currentState, component, props);
-    }else{
+    } else {
         props.key = newKey;
         props.uniqueKey = newUniqueKey;
         props.name = name;
         props.data = data;
-        newWindow[newUniqueKey] = React.cloneElement(component,props);
+        newWindow[newUniqueKey] = React.cloneElement(component, props);
         return newWindow;
+    }
+}
+export let moveWindow = (e, elId, firstMoveOffset) => {
+    let explorerEl = document.getElementById(elId);
+    let explorerElStyle = getComputedStyle(explorerEl);
+    let currentStyle = {
+        x: parseFloat(explorerElStyle.getPropertyValue("left")),
+        y: parseFloat(explorerElStyle.getPropertyValue("top")),
+        width: parseFloat(explorerElStyle.getPropertyValue("width")),
+        height: parseFloat(explorerElStyle.getPropertyValue("height")),
+    }
+    if (firstMoveOffset === null) return firstMoveOffset = e.pageX - currentStyle.x;
+    else {
+        let newX = e.pageX - firstMoveOffset;
+        let newY = e.pageY;
+        if (newX > 0 && currentStyle.width + newX < window.innerWidth) {
+            explorerEl.style.left = newX + "px";
+        }
+        if (newY > 0 && currentStyle.height + newY < window.innerHeight) {
+            explorerEl.style.top = newY + "px";
+        }
+        return null
     }
 }

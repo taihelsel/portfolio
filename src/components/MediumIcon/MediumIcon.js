@@ -15,13 +15,13 @@ class MediumIcon extends Component {
           this.props.handleFolderClick(e, this.props.data.name, this.props.data.content);
           break;
         case "text":
-          this.props.handleTextDocClick(e, this.props.data.name, this.props.data.content);
+          this.props.handleFileViewerOpen(e, this.props.data.name, this.props.data.content,"txt");
           break;
         case "img":
-          this.props.handleImageFileClick(e, this.props.data.name, this.props.data.content);
+          this.props.handleFileViewerOpen(e, this.props.data.name, this.props.data.content,"img");
           break;
         case "text/pdf":
-          this.props.handleFileOption(e, this.props.data.name, this.props.data.content, "View file as", ["text", "pdf"]);
+          this.props.handlePopupModal(e, this.props.data.name, this.props.data.content, "View file as", ["txt", "pdf"]);
           break;
         case "html":
           window.open(this.props.data.content);

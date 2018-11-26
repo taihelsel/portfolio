@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Explorer.css';
 
 //Static Data
-import {HomeData} from "../../data/HomeData.js";
-
+import { HomeData } from "../../data/HomeData.js";
+//generic handlers
+import { moveWindow } from "../../handlers/windowHandlers.js";
 //React Components
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import SettingsDropDown from "../SettingsDropDown/SettingsDropDown.js";
@@ -93,12 +94,12 @@ class Explorer extends Component {
         },
       ],
       currentlyDisplayedDrop: null,
-      backArrow:[],
-      forwardArrow:[]
+      backArrow: [],
+      forwardArrow: []
     }
     this.firstMoveOffset = null
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setAsActiveExplorer();
   }
   resetExplorerSettings = () => {
@@ -107,10 +108,21 @@ class Explorer extends Component {
     }
   }
   setAsActiveExplorer = () => {
-    try{
+    try {
       document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
-    }catch{}
-    document.getElementById("explorer" + this.props.uniqueKey).classList.add("selected-explorer");
+    } catch{ }
+    document.getElementById(this.props.uniqueKey).classList.add("selected-explorer");
+  }
+  handleMouseUp = (e) => {
+    this.firstMoveOffset = null;
+    document.removeEventListener('mousemove', this.moveExplorer);
+  }
+  handleMouseDown = (e) => {
+    document.addEventListener('mousemove', this.moveExplorer);
+  }
+  moveExplorer = (e) => {
+    let x = moveWindow(e, this.props.uniqueKey, this.firstMoveOffset);
+    if (x !== null) this.firstMoveOffset = x;
   }
   resetSettingsDropdown = () => {
     this.setState({
@@ -164,104 +176,70 @@ class Explorer extends Component {
   handleFolderClick = (e, name, data) => {
     let x = this.state.backArrow;
     x.push({
-      name:this.state.name,
-      data:this.state.data
+      name: this.state.name,
+      data: this.state.data
     });
     this.setState({
-      backArrow:x,
-      forwardArrow:[],
+      backArrow: x,
+      forwardArrow: [],
       name: name,
       data: data,
     })
   }
-  handleTextDocClick = (e,name,data) => {
-    this.props.handleTextDocClick(e,name,data);
-  }
-  
-  handleImageFileClick = (e,name,data) => {
-    this.props.handleImageFileClick(e,name,data);
-  }
-
-  handleMouseUp = (e) => {
-    this.firstMoveOffset = null;
-    document.removeEventListener('mousemove', this.moveExplorer);
-  }
-  handleMouseDown = (e) => {
-    document.addEventListener('mousemove', this.moveExplorer);
-  }
-  moveExplorer = (e) => {
-    let explorerEl = document.getElementById("explorer" + this.props.uniqueKey);
-    let explorerElStyle = getComputedStyle(explorerEl);
-    let currentStyle = {
-      x: parseFloat(explorerElStyle.getPropertyValue("left")),
-      y: parseFloat(explorerElStyle.getPropertyValue("top")),
-      width: parseFloat(explorerElStyle.getPropertyValue("width")),
-      height: parseFloat(explorerElStyle.getPropertyValue("height")),
-    }
-    if (this.firstMoveOffset === null) this.firstMoveOffset = e.pageX - currentStyle.x;
-    let newX = e.pageX - this.firstMoveOffset;
-    let newY = e.pageY;
-    if (newX > 0 && currentStyle.width + newX < window.innerWidth) {
-      explorerEl.style.left = newX + "px";
-    }
-    if (newY > 0 && currentStyle.height + newY < window.innerHeight) {
-      explorerEl.style.top = newY + "px";
-    }
-  }
   handleBackArrowClick = (e) => {
     //first check if empty
-    if(this.state.backArrow.length>0){
-      let newData = this.state.backArrow[this.state.backArrow.length-1];
+    if (this.state.backArrow.length > 0) {
+      let newData = this.state.backArrow[this.state.backArrow.length - 1];
       //verify contents are not already being displayed
-      if(newData.data !== this.state.data || newData.name !== this.state.name){
+      if (newData.data !== this.state.data || newData.name !== this.state.name) {
         //update data to be displayed and update back arrow history.
         let newBackArrow = this.state.backArrow;
         let newForwardArrow = this.state.forwardArrow;
         newBackArrow.pop();
         newForwardArrow.push({
-          name:this.state.name,
-          data:this.state.data
+          name: this.state.name,
+          data: this.state.data
         });
         this.setState({
-          name:newData.name,
-          data:newData.data,
-          backArrow:newBackArrow,
-          forwardArrow:newForwardArrow
+          name: newData.name,
+          data: newData.data,
+          backArrow: newBackArrow,
+          forwardArrow: newForwardArrow
         });
       }
     }
   }
   handleForwardArrowClick = (e) => {
     //first check if empty
-    if(this.state.forwardArrow.length>0){
-      let newData = this.state.forwardArrow[this.state.forwardArrow.length-1];
+    if (this.state.forwardArrow.length > 0) {
+      let newData = this.state.forwardArrow[this.state.forwardArrow.length - 1];
       //verify contents are not already being displayed
-      if(newData.data !== this.state.data || newData.name !== this.state.name){
+      if (newData.data !== this.state.data || newData.name !== this.state.name) {
         //update data to be displayed and update forward arrow history
         let newForwardArrow = this.state.forwardArrow;
         let newBackArrow = this.state.backArrow;
         newForwardArrow.pop();
         newBackArrow.push({
-          name:this.state.name,
-          data:this.state.data
+          name: this.state.name,
+          data: this.state.data
         });
         this.setState({
-          name:newData.name,
-          data:newData.data,
-          forwardArrow:newForwardArrow,
-          backArrow:newBackArrow
+          name: newData.name,
+          data: newData.data,
+          forwardArrow: newForwardArrow,
+          backArrow: newBackArrow
         });
       }
     }
   }
-  renderDesktop = () => this.setState({ data:HomeData,name:"Desktop",backArrow:[],forwardArrow:[],});
-  renderProjects = ()=> this.setState({data:HomeData[0].content,name:"Projects",backArrow:[],forwardArrow:[]});
+  renderDesktop = () => this.setState({ data: HomeData, name: "Desktop", backArrow: [], forwardArrow: [], });
+  renderProjects = () => this.setState({ data: HomeData[0].content, name: "Projects", backArrow: [], forwardArrow: [] });
   renderResume = () => this.props.handleFileOption(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
   renderLinkedIn = () => window.open("https://www.linkedin.com/in/taihelsel/");
   renderGitHub = () => window.open("https://github.com/taihelsel");
   render() {
     return (
-      <div id={"explorer" + this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
+      <div id={this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
           <h3 className="explorer-title" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>{this.state.name}</h3>
           <ul className="explorer-controls">
@@ -288,10 +266,10 @@ class Explorer extends Component {
             </li>
           </ul>
           <div className="explorer-nav">
-            <div onClick={this.handleBackArrowClick} className={this.state.backArrow.length>0?"":"explorer-nav-disabled"}>
+            <div onClick={this.handleBackArrowClick} className={this.state.backArrow.length > 0 ? "" : "explorer-nav-disabled"}>
               <img src={require("../.././media/icons/leftarrow.svg")} />
             </div>
-            <div onClick={this.handleForwardArrowClick}  className={this.state.forwardArrow.length>0?"":"explorer-nav-disabled"}>
+            <div onClick={this.handleForwardArrowClick} className={this.state.forwardArrow.length > 0 ? "" : "explorer-nav-disabled"}>
               <img src={require("../.././media/icons/rightarrow.svg")} />
             </div>
           </div>
@@ -311,7 +289,7 @@ class Explorer extends Component {
           </ul>
           <ul className="explorer-content">
             {this.state.data.map((x) => {
-              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleTextDocClick={this.handleTextDocClick} handleImageFileClick={this.handleImageFileClick} handleFolderClick={this.handleFolderClick} data={x} /></li>
+              return <li><MediumIcon handleFileOption={this.props.handleFileOption} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>
