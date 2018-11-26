@@ -30,8 +30,13 @@ class MediumIcon extends Component {
           console.log("need to handle other file types");
           break;
       }
+      e.currentTarget.classList.remove("selected-icon");
       this.setState({ clickCount: 0 });
     } else {
+      if( e.currentTarget.classList.contains("selected-icon")===false){
+        this.props.unselectAllIcons();
+        e.currentTarget.classList.add("selected-icon");
+      }
       let newClickCount = this.state.clickCount;
       newClickCount++;
       this.setState({
@@ -66,11 +71,11 @@ class MediumIcon extends Component {
         this.setState({
           clickCount: 0,
         });
-      }, 1500);
+      }, 500);
     }
     return (
       <div onClick={this.handleIconClick} className="medium-icon">
-        <img src={iconImg} />
+        <div className="medium-icon-mask"> <img src={iconImg} /> <div className="layer-mask"/></div>
         <h3>{this.props.data.name}</h3>
       </div>
     );

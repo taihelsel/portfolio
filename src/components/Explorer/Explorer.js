@@ -16,31 +16,9 @@ class Explorer extends Component {
       data: this.props.data,
       fileDropdown: [
         {
-          title: "New Tab",
-          shortcut: "Ctrl+T",
-          handleClick: () => {
-            console.log("new tab clicked");
-          }
-        },
-        {
           title: "New Window",
-          shortcut: "Ctrl+N",
-          handleClick: () => {
-            console.log("New Window clicked");
-          }
-        },
-        {
-          title: "Create New Folder",
-          shortcut: "Shift+Ctrl+N",
-          handleClick: () => {
-            console.log("Create New Folder clicked");
-          }
-        },
-        {
-          title: "Create New Document",
-          handleClick: () => {
-            console.log("Create New Document clicked");
-          }
+          // shortcut: "Ctrl+N",
+          handleClick: () => this.renderNewExplorer(),
         },
         {
           title: "Close All Windows",
@@ -54,17 +32,13 @@ class Explorer extends Component {
       editDropdown: [
         {
           title: "Select All",
-          shortcut: "Ctrl+A",
-          handleClick: () => {
-            console.log("select all clicked");
-          }
+          // shortcut: "Ctrl+A",
+          handleClick: () => this.selectAllItems(),
         },
         {
           title: "Invert Selection",
-          shortcut: "Shift+Ctrl+I",
-          handleClick: () => {
-            console.log("Invert Selection clicked");
-          }
+          // shortcut: "Shift+Ctrl+I",
+          handleClick: () => this.invertSelection(),
         },
       ],
       goDropdown: [
@@ -174,6 +148,7 @@ class Explorer extends Component {
     }
   }
   handleFolderClick = (e, name, data) => {
+    this.unselectAllItems();
     let x = this.state.backArrow;
     x.push({
       name: this.state.name,
@@ -232,6 +207,39 @@ class Explorer extends Component {
       }
     }
   }
+  selectAllItems = () => {
+    let parentEl = document.getElementById(this.props.uniqueKey);
+    let x = parentEl.getElementsByClassName("medium-icon");
+    for (let i = 0; i < x.length; i++) {
+      x[i].classList.add("selected-icon");
+    }
+  }
+  invertSelection = () => {
+    let parentEl = document.getElementById(this.props.uniqueKey);
+    let x = parentEl.getElementsByClassName("medium-icon");
+    for (let i = 0; i < x.length; i++) {
+      if (x[i].classList.contains("selected-icon")) {
+        x[i].classList.remove("selected-icon");
+      } else {
+        x[i].classList.add("selected-icon");
+      }
+    }
+  }
+  unselectAllItems = () => {
+    let parentEl = document.getElementById(this.props.uniqueKey);
+    let x = parentEl.getElementsByClassName("medium-icon");
+    for (let i = 0; i < x.length; i++) {
+      if(x[i].classList.contains("selected-icon")){
+        x[i].classList.remove("selected-icon");
+      }
+    }
+  }
+  handleExplorerContentClick = (e) => {
+    if (e.target.classList.contains("explorer-content")) {
+      this.unselectAllItems();
+    }
+  }
+  renderNewExplorer = () => this.props.handleExplorerOpen(null, this.state.name, this.state.data);
   renderDesktop = () => this.setState({ data: HomeData, name: "Desktop", backArrow: [], forwardArrow: [], });
   renderProjects = () => this.setState({ data: HomeData[0].content, name: "Projects", backArrow: [], forwardArrow: [] });
   renderResume = () => this.props.handlePopupModal(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
@@ -274,7 +282,7 @@ class Explorer extends Component {
             </div>
           </div>
         </div>
-        <div className="explorer-body">
+        <div className="explorer-body" onClick={this.handleExplorerContentClick}>
           <ul className="explorer-sidebar">
             <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
               <h1 className="explorer-sidebar-section-head"><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1>
@@ -288,8 +296,8 @@ class Explorer extends Component {
             </li>
           </ul>
           <ul className="explorer-content">
-            {this.state.data.map((x) => {
-              return <li><MediumIcon handlePopupModal={this.props.handlePopupModal} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
+            {this.state.data.map((x, i) => {
+              return <li><MediumIcon key={this.props.uniqueKey + "-icon-" + i} unselectAllIcons={this.unselectAllItems} handlePopupModal={this.props.handlePopupModal} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}
           </ul>
         </div>

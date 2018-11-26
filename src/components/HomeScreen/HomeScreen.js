@@ -5,7 +5,7 @@ import './HomeScreen.css';
 import { HomeData } from "../../data/HomeData.js";
 //Generic Functions
 import { handleWindowClose, handleWindowOpen } from "../../handlers/windowHandlers.js";
-import {drawBox} from "../../handlers/drawBoxHandler.js";
+import { drawBox } from "../../handlers/drawBoxHandler.js";
 //ReactComponents
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
@@ -20,7 +20,7 @@ class HomeScreen extends Component {
             fileViewerWindows: {},
             homeFolders: HomeData,
         }
-        this.firstPos = {x: 0,y: 0}
+        this.firstPos = { x: 0, y: 0 }
     }
     componentDidMount() {
         //adding listeners for the green box when you drag mouse
@@ -45,32 +45,46 @@ class HomeScreen extends Component {
             document.addEventListener('mousemove', this.handleDrawBox);
         }
     }
-    handleDrawBox = (e) => drawBox(e,"HomeScreen",this.firstPos);
+    handleDrawBox = (e) => drawBox(e, "HomeScreen", this.firstPos);
     //handle new windows
-    handleExplorerOpen = (e, name, data) => this.setState({explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen:this.handleFileViewerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })});
-    handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose,type:type })});
-    handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question })});
+    handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
+    handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
+    handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question }) });
     //handle closing old windows
-    handleExplorerClose = (e, key) => this.setState({explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows })});
-    handleFileViewerClose = (e, key) =>  this.setState({fileViewerWindows: handleWindowClose(e, key, { ...this.state.fileViewerWindows })});
-    handlePopupModalClose = (e, key) => this.setState({ popupModalWindows: handleWindowClose(e, key, { ...this.state.popupModalWindows })});
+    handleExplorerClose = (e, key) => this.setState({ explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows }) });
+    handleFileViewerClose = (e, key) => this.setState({ fileViewerWindows: handleWindowClose(e, key, { ...this.state.fileViewerWindows }) });
+    handlePopupModalClose = (e, key) => this.setState({ popupModalWindows: handleWindowClose(e, key, { ...this.state.popupModalWindows }) });
     closeAllExplorers = () => this.setState({ explorerWindows: {} });
 
+    unselectAllItems = () => {
+        let parentEl = document.getElementById("HomeScreen");
+        let x = parentEl.getElementsByClassName("medium-icon");
+        for (let i = 0; i < x.length; i++) {
+            if (x[i].classList.contains("selected-icon")) {
+                x[i].classList.remove("selected-icon");
+            }
+        }
+    }
     renderAllWindows = () => {
         return (
             <div>
-                {Object.values(this.state.explorerWindows).map( item => item)}
-                {Object.values(this.state.fileViewerWindows).map( item => item)}
-                {Object.values(this.state.popupModalWindows).map( item => item)}
+                {Object.values(this.state.explorerWindows).map(item => item)}
+                {Object.values(this.state.fileViewerWindows).map(item => item)}
+                {Object.values(this.state.popupModalWindows).map(item => item)}
             </div>
         );
     }
+    handleHomeScreenClick = (e) => {
+        if (e.target.id === "HomeScreen") {
+            this.unselectAllItems();
+        }
+    }
     render() {
         return (
-            <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+            <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }} onClick={this.handleHomeScreenClick}>
                 <div className="shortcut-wrapper">
-                    {this.state.homeFolders.map((x) => {
-                        return <MediumIcon handlePopupModal={this.handlePopupModal} handleFileViewerOpen={this.handleFileViewerOpen} handleFolderClick={this.handleExplorerOpen} data={x} />
+                    {this.state.homeFolders.map((x, i) => {
+                        return <MediumIcon key={"homescreen-icon" + i} unselectAllIcons={this.unselectAllItems} handlePopupModal={this.handlePopupModal} handleFileViewerOpen={this.handleFileViewerOpen} handleFolderClick={this.handleExplorerOpen} data={x} />
                     })}
                 </div>
                 {this.renderAllWindows()}
