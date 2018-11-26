@@ -5,6 +5,7 @@ import './HomeScreen.css';
 import { HomeData } from "../../data/HomeData.js";
 //Generic Functions
 import { handleWindowClose, handleWindowOpen } from "../../handlers/windowHandlers.js";
+import {drawBox} from "../../handlers/drawBoxHandler.js";
 //ReactComponents
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import Explorer from "../Explorer/Explorer.js";
@@ -23,20 +24,18 @@ class HomeScreen extends Component {
             imageViewerWindows: {},
             homeFolders: HomeData,
         }
-        this.firstPos = {
-            x: 0,
-            y: 0
-        }
+        this.firstPos = {x: 0,y: 0}
     }
     componentDidMount() {
         //adding listeners for the green box when you drag mouse
         document.getElementById("HomeScreen").addEventListener("mouseup", this.onMouseUp);
         document.getElementById("HomeScreen").addEventListener("mousedown", this.onMouseDown);
     }
+    //handle draw box
     onMouseUp = (e) => {
         if (e.which === 1) {
             try { //cause JavaScript...
-                document.removeEventListener('mousemove', this.drawBox);
+                document.removeEventListener('mousemove', this.handleDrawBox);
                 document.getElementById("selectBox").classList.add("hideBox");
             } catch{ };
         }
@@ -47,52 +46,10 @@ class HomeScreen extends Component {
                 x: e.pageX,
                 y: e.pageY
             }
-            document.addEventListener('mousemove', this.drawBox);
+            document.addEventListener('mousemove', this.handleDrawBox);
         }
     }
-    drawBox = (e) => {
-        //doing extreme programmer math
-        let secondPos = { //will hold the currentPosition of cursor
-            x: e.pageX,
-            y: e.pageY
-        }
-        let posDiff = { //difference between the starting point and current point.
-            x: this.firstPos.x - secondPos.x,
-            y: this.firstPos.y - secondPos.y,
-        }
-        let size = { //size of the box
-            w: Math.abs(e.pageX - this.firstPos.x),
-            h: Math.abs(e.pageY - this.firstPos.y)
-        }
-        let box = document.getElementById("selectBox");
-        if (box === null) {
-            //drawing initial box
-            box = document.createElement("div");
-            box.id = "selectBox";
-            box.style.width = "0px";
-            box.style.height = "0px";
-            box.style.position = "absolute";
-            box.style.top = this.firstPos.y + "px";
-            box.style.left = this.firstPos.x + "px";
-            document.getElementById("HomeScreen").appendChild(box);
-        } else {
-            //reseting an existing box
-            box.classList.remove("hideBox");
-            box.style.width = "0px";
-            box.style.height = "0px";
-            box.style.position = "absolute";
-            box.style.top = this.firstPos.y + "px";
-            box.style.left = this.firstPos.x + "px";
-        }
-        //updating box size
-        box.style.width = size.w + "px";
-        box.style.height = size.h + "px";
-        //update box position (all the fancy stuff to translate the box)
-        if (posDiff.x > 0) box.style.left = this.firstPos.x - posDiff.x + "px";
-        else box.style.left = this.firstPos.x + "px";
-        if (posDiff.y > 0) box.style.top = this.firstPos.y - posDiff.y + "px";
-        else box.style.top = this.firstPos.y + "px";
-    }
+    handleDrawBox = (e) => drawBox(e,"HomeScreen",this.firstPos);
     //handle new windows
     handleFolderClick = (e, name, data) => this.setState({explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handleFileOption: this.handleFileOption, handleTextDocClick: this.handleTextDocClick, handleImageFileClick: this.handleImageFileClick, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose })});
     handleTextDocClick = (e, name, data) => this.setState({textViewerWindows: handleWindowOpen(e, name, data, { ...this.state.textViewerWindows }, <TextViewer />, { handleClose: this.handleTextViewerClose })});
@@ -110,21 +67,11 @@ class HomeScreen extends Component {
     renderAllWindows = () => {
         return (
             <div>
-                {Object.keys(this.state.explorerWindows).map((key) => {
-                    return this.state.explorerWindows[key];
-                })}
-                {Object.keys(this.state.textViewerWindows).map((key) => {
-                    return this.state.textViewerWindows[key];
-                })}
-                {Object.keys(this.state.imageViewerWindows).map((key) => {
-                    return this.state.imageViewerWindows[key];
-                })}
-                {Object.keys(this.state.PDFViewerWindows).map((key) => {
-                    return this.state.PDFViewerWindows[key];
-                })}
-                {Object.keys(this.state.fileOptionWindows).map((key) => {
-                    return this.state.fileOptionWindows[key];
-                })}
+                {Object.values(this.state.explorerWindows).map( item => item)}
+                {Object.values(this.state.textViewerWindows).map( item => item)}
+                {Object.values(this.state.imageViewerWindows).map( item => item)}
+                {Object.values(this.state.PDFViewerWindows).map( item => item)}
+                {Object.values(this.state.fileOptionWindows).map( item => item)}
             </div>
         );
     }
