@@ -2,6 +2,7 @@
     text-align: center;
     user-select: none;
     z-index: 4;
+    width: 110px;
 }
 .medium-icon img{
     width:48px;
@@ -16,6 +17,8 @@
     font-weight:400;
     user-select: none;
     padding:1px;
+    width:fit-content;
+    margin:auto;
 }
 .medium-icon:hover img{
     filter:brightness(125%);
