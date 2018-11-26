@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/anesthesia/static/media/2048remake.cf5eb3e8.gif"
   },
   {
-    "revision": "1eb3da32bfce366d1170",
-    "url": "/anesthesia/static/css/main.2fca3c52.chunk.css"
+    "revision": "90e03dddd96256171084",
+    "url": "/anesthesia/static/css/main.cc6a0f6a.chunk.css"
   },
   {
     "revision": "ed5a7db10e33dfae9c2a",
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/anesthesia/static/media/rightarrow.15cc8a49.svg"
   },
   {
-    "revision": "1eb3da32bfce366d1170",
-    "url": "/anesthesia/static/js/main.1eb3da32.chunk.js"
+    "revision": "90e03dddd96256171084",
+    "url": "/anesthesia/static/js/main.90e03ddd.chunk.js"
   },
   {
     "revision": "c15247660cc26bbaddc4b1096f10900f",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/anesthesia/static/media/chrome.0400f304.png"
   },
   {
-    "revision": "1e0db050db65eac8b3bd5ec071a4e902",
+    "revision": "b06e60dc420967a0b46eb140258a8058",
     "url": "/anesthesia/index.html"
   }
 ];
