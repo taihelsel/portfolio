@@ -248,7 +248,9 @@ class Explorer extends Component {
   renderGitHub = () => window.open("https://github.com/taihelsel");
 
   handleContentClick = (e) =>{
-    this.unselectAllItems();
+    if(e.target.classList.contains("explorer-content")){
+      this.unselectAllItems();
+    }
   }
   handleMouseUpContent = (e) => {
     if (e.button === 0) {
