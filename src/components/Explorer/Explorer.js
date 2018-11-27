@@ -5,6 +5,7 @@ import './Explorer.css';
 import { HomeData } from "../../data/HomeData.js";
 //generic handlers
 import { moveWindow } from "../../handlers/windowHandlers.js";
+import { drawBox } from "../../handlers/drawBoxHandler.js";
 //React Components
 import MediumIcon from "../MediumIcon/MediumIcon.js";
 import SettingsDropDown from "../SettingsDropDown/SettingsDropDown.js";
@@ -72,6 +73,8 @@ class Explorer extends Component {
       forwardArrow: []
     }
     this.firstMoveOffset = null
+    this.firstPos = { x: 0, y: 0 }
+    this.iconLocations = []
   }
   componentDidMount() {
     this.setAsActiveExplorer();
@@ -232,14 +235,9 @@ class Explorer extends Component {
     let parentEl = document.getElementById(this.props.uniqueKey);
     let x = parentEl.getElementsByClassName("medium-icon");
     for (let i = 0; i < x.length; i++) {
-      if(x[i].classList.contains("selected-icon")){
+      if (x[i].classList.contains("selected-icon")) {
         x[i].classList.remove("selected-icon");
       }
-    }
-  }
-  handleExplorerContentClick = (e) => {
-    if (e.target.classList.contains("explorer-content")) {
-      this.unselectAllItems();
     }
   }
   renderNewExplorer = () => this.props.handleExplorerOpen(null, this.state.name, this.state.data);
@@ -248,6 +246,44 @@ class Explorer extends Component {
   renderResume = () => this.props.handlePopupModal(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
   renderLinkedIn = () => window.open("https://www.linkedin.com/in/taihelsel/");
   renderGitHub = () => window.open("https://github.com/taihelsel");
+
+  handleContentClick = (e) =>{
+    this.unselectAllItems();
+  }
+  handleMouseUpContent = (e) => {
+    if (e.button === 0) {
+      try { //cause JavaScript...
+        document.removeEventListener('mousemove', this.handleDrawBox);
+        document.getElementById("selectBox").remove();
+      } catch{ };
+    }
+  }
+  handleMouseDownContent = (e) => {
+    if (e.button===0 && e.target.classList.contains("explorer-content")) {
+      let parentEl =  document.getElementById(this.props.uniqueKey);
+      let selectBox = document.getElementById("selectBox");
+      if (selectBox) document.getElementById("selectBox").remove();
+      let rect = parentEl.getElementsByClassName("explorer-content")[0].getBoundingClientRect();
+      this.firstPos = {
+        x: e.pageX,
+        y: e.pageY
+      }
+      this.drawBoxOffset = rect;
+      let icons = parentEl.getElementsByClassName("medium-icon");
+      for (let i = 0; i < icons.length; i++) {
+        let rect = icons[i].getBoundingClientRect();
+        this.iconLocations.push({
+          top: rect.top,
+          left: rect.left,
+          bottom: rect.bottom,
+          right: rect.right,
+          index: i,
+        });
+      }
+      document.addEventListener('mousemove', this.handleDrawBox);
+    }
+  }
+  handleDrawBox = (e) => drawBox(e, true,this.props.uniqueKey, this.firstPos, this.iconLocations,this.drawBoxOffset);
   render() {
     return (
       <div id={this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
@@ -285,7 +321,7 @@ class Explorer extends Component {
             </div>
           </div>
         </div>
-        <div className="explorer-body" onClick={this.handleExplorerContentClick}>
+        <div className="explorer-body">
           <ul className="explorer-sidebar">
             <li className="explorer-sidebar-section" onClick={this.handleSidebarClick}>
               <h1 className="explorer-sidebar-section-head"><i className="explorer-sidebar-section-icon">&#x25BA;</i>My Computer</h1>
@@ -298,7 +334,7 @@ class Explorer extends Component {
               </ul>
             </li>
           </ul>
-          <ul className="explorer-content">
+          <ul className="explorer-content" onClick={this.handleContentClick} onMouseDown={this.handleMouseDownContent} onMouseUp={this.handleMouseUpContent} >
             {this.state.data.map((x, i) => {
               return <li><MediumIcon key={this.props.uniqueKey + "-icon-" + i} unselectAllIcons={this.unselectAllItems} handlePopupModal={this.props.handlePopupModal} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.handleFolderClick} data={x} /></li>
             })}

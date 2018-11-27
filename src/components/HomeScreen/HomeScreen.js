@@ -43,6 +43,9 @@ class HomeScreen extends Component {
     }
     onMouseDown = (e) => {
         if (e.which === 1 && e.target.id === "HomeScreen") {
+            let parentEl =  document.getElementById("HomeScreen");
+            let selectBox = document.getElementById("selectBox");
+            if (selectBox) document.getElementById("selectBox").remove();
             this.firstPos = {
                 x: e.pageX,
                 y: e.pageY
@@ -61,7 +64,7 @@ class HomeScreen extends Component {
             document.addEventListener('mousemove', this.handleDrawBox);
         }
     }
-    handleDrawBox = (e) => drawBox(e, "HomeScreen", this.firstPos, this.iconLocations);
+    handleDrawBox = (e) => drawBox(e,false, "HomeScreen", this.firstPos, this.iconLocations);
     //handle new windows
     handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
     handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
@@ -93,7 +96,6 @@ class HomeScreen extends Component {
     handleHomeScreenClick = (e) => {
         let selectBox = document.getElementById("selectBox");
         if (selectBox !== null && selectBox.classList.contains("recently-selected")) {
-            console.log("recently selected");
             selectBox.classList.remove("recently-selected");
         } else if (e.target.id === "HomeScreen") this.unselectAllItems();
 
