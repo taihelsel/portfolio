@@ -21,6 +21,7 @@ class HomeScreen extends Component {
             homeFolders: HomeData,
         }
         this.firstPos = { x: 0, y: 0 }
+        this.iconLocations = []
     }
     componentDidMount() {
         //adding listeners for the green box when you drag mouse
@@ -33,6 +34,10 @@ class HomeScreen extends Component {
             try { //cause JavaScript...
                 document.removeEventListener('mousemove', this.handleDrawBox);
                 document.getElementById("selectBox").classList.add("hideBox");
+                if (this.firstPos.x !== e.pageX && this.firstPos.y !== e.pageY){
+                    document.getElementById("selectBox").classList.add("recently-selected");
+                }
+                this.iconLocations = [];
             } catch{ };
         }
     }
@@ -42,10 +47,21 @@ class HomeScreen extends Component {
                 x: e.pageX,
                 y: e.pageY
             }
+            let icons = document.getElementById("HomeScreen").getElementsByClassName("medium-icon");
+            for (let i = 0; i < icons.length; i++) {
+                let rect = icons[i].getBoundingClientRect();
+                this.iconLocations.push({
+                    top: rect.top,
+                    left: rect.left,
+                    bottom: rect.bottom,
+                    right: rect.right,
+                    index: i,
+                });
+            }
             document.addEventListener('mousemove', this.handleDrawBox);
         }
     }
-    handleDrawBox = (e) => drawBox(e, "HomeScreen", this.firstPos);
+    handleDrawBox = (e) => drawBox(e, "HomeScreen", this.firstPos, this.iconLocations);
     //handle new windows
     handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
     handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
@@ -75,9 +91,12 @@ class HomeScreen extends Component {
         );
     }
     handleHomeScreenClick = (e) => {
-        if (e.target.id === "HomeScreen") {
-            this.unselectAllItems();
-        }
+        let selectBox = document.getElementById("selectBox");
+        if (selectBox !== null && selectBox.classList.contains("recently-selected")) {
+            console.log("recently selected");
+            selectBox.classList.remove("recently-selected");
+        } else if (e.target.id === "HomeScreen") this.unselectAllItems();
+
     }
     render() {
         return (

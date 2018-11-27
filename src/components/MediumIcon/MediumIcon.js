@@ -30,7 +30,7 @@ class MediumIcon extends Component {
           console.log("need to handle other file types");
           break;
       }
-      e.currentTarget.classList.remove("selected-icon");
+      this.props.unselectAllIcons();
       this.setState({ clickCount: 0 });
     } else {
       if( e.currentTarget.classList.contains("selected-icon")===false){

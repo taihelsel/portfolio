@@ -137,6 +137,7 @@ class Explorer extends Component {
     this.props.handleClose(e, this.props.uniqueKey);
   }
   handleSidebarClick = (e) => {
+    this.unselectAllItems();
     let target = e.target;
     let icon = e.currentTarget.getElementsByClassName("explorer-sidebar-section-icon")[0];
     if (icon.innerHTML === "\u25BA") {
@@ -167,6 +168,7 @@ class Explorer extends Component {
       let newData = this.state.backArrow[this.state.backArrow.length - 1];
       //verify contents are not already being displayed
       if (newData.data !== this.state.data || newData.name !== this.state.name) {
+        this.unselectAllItems();
         //update data to be displayed and update back arrow history.
         let newBackArrow = this.state.backArrow;
         let newForwardArrow = this.state.forwardArrow;
@@ -190,6 +192,7 @@ class Explorer extends Component {
       let newData = this.state.forwardArrow[this.state.forwardArrow.length - 1];
       //verify contents are not already being displayed
       if (newData.data !== this.state.data || newData.name !== this.state.name) {
+        this.unselectAllItems();
         //update data to be displayed and update forward arrow history
         let newForwardArrow = this.state.forwardArrow;
         let newBackArrow = this.state.backArrow;
