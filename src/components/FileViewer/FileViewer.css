@@ -1,6 +1,6 @@
 .explorer-fullscreen{
     width:100%!important;
-    height:100%!important;
+    height:calc(100% - 37px)!important;
     top:0!important;
     left:0!important;
     min-height: unset!important;

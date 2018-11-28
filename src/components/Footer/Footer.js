@@ -17,6 +17,9 @@ class Footer extends Component {
             <img className="nav-item-app-icon" src={require("../.././media/icons/folder.png")} alt="Folder Logo" />
           </li>
         </ul>
+        <ul className="footer-windows">
+          <li>Folder stuff</li>
+        </ul>
       </div>
     );
   }

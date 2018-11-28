@@ -3,21 +3,14 @@ import BackgroundImage from "../../media/background2.jpg";
 import './HomeScreen.css';
 //Static Data
 import { HomeData } from "../../data/HomeData.js";
-//Generic Functions
-import { handleWindowClose, handleWindowOpen } from "../../handlers/windowHandlers.js";
+
 import { drawBox } from "../../handlers/drawBoxHandler.js";
 //ReactComponents
 import MediumIcon from "../MediumIcon/MediumIcon.js";
-import Explorer from "../Explorer/Explorer.js";
-import FileViewer from "../FileViewer/FileViewer.js";
-import PopupModal from "../PopupModal/PopupModal.js";
 class HomeScreen extends Component {
     constructor() {
         super();
         this.state = {
-            explorerWindows: {},
-            popupModalWindows: {},
-            fileViewerWindows: {},
             homeFolders: HomeData,
         }
         this.firstPos = { x: 0, y: 0 }
@@ -34,16 +27,12 @@ class HomeScreen extends Component {
             try { //cause JavaScript...
                 document.removeEventListener('mousemove', this.handleDrawBox);
                 document.getElementById("selectBox").classList.add("hideBox");
-                if (this.firstPos.x !== e.pageX && this.firstPos.y !== e.pageY){
-                    document.getElementById("selectBox").classList.add("recently-selected");
-                }
-                this.iconLocations = [];
+                document.getElementById("selectBox").remove();
             } catch{ };
         }
     }
     onMouseDown = (e) => {
         if (e.which === 1 && e.target.id === "HomeScreen") {
-            let parentEl =  document.getElementById("HomeScreen");
             let selectBox = document.getElementById("selectBox");
             if (selectBox) document.getElementById("selectBox").remove();
             this.firstPos = {
@@ -65,16 +54,6 @@ class HomeScreen extends Component {
         }
     }
     handleDrawBox = (e) => drawBox(e,false, "HomeScreen", this.firstPos, this.iconLocations);
-    //handle new windows
-    handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
-    handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
-    handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question }) });
-    //handle closing old windows
-    handleExplorerClose = (e, key) => this.setState({ explorerWindows: handleWindowClose(e, key, { ...this.state.explorerWindows }) });
-    handleFileViewerClose = (e, key) => this.setState({ fileViewerWindows: handleWindowClose(e, key, { ...this.state.fileViewerWindows }) });
-    handlePopupModalClose = (e, key) => this.setState({ popupModalWindows: handleWindowClose(e, key, { ...this.state.popupModalWindows }) });
-    closeAllExplorers = () => this.setState({ explorerWindows: {} });
-
     unselectAllItems = () => {
         let parentEl = document.getElementById("HomeScreen");
         let x = parentEl.getElementsByClassName("medium-icon");
@@ -83,15 +62,6 @@ class HomeScreen extends Component {
                 x[i].classList.remove("selected-icon");
             }
         }
-    }
-    renderAllWindows = () => {
-        return (
-            <div>
-                {Object.values(this.state.explorerWindows).map(item => item)}
-                {Object.values(this.state.fileViewerWindows).map(item => item)}
-                {Object.values(this.state.popupModalWindows).map(item => item)}
-            </div>
-        );
     }
     handleHomeScreenClick = (e) => {
         let selectBox = document.getElementById("selectBox");
@@ -105,10 +75,9 @@ class HomeScreen extends Component {
             <div id="HomeScreen" style={{ backgroundImage: `url(${BackgroundImage})` }} onClick={this.handleHomeScreenClick}>
                 <div className="shortcut-wrapper">
                     {this.state.homeFolders.map((x, i) => {
-                        return <MediumIcon key={"homescreen-icon" + i} unselectAllIcons={this.unselectAllItems} handlePopupModal={this.handlePopupModal} handleFileViewerOpen={this.handleFileViewerOpen} handleFolderClick={this.handleExplorerOpen} data={x} />
+                        return <MediumIcon key={"homescreen-icon" + i} unselectAllIcons={this.unselectAllItems} handlePopupModal={this.props.handlePopupModal} handleFileViewerOpen={this.props.handleFileViewerOpen} handleFolderClick={this.props.handleExplorerOpen} data={x} />
                     })}
                 </div>
-                {this.renderAllWindows()}
             </div>
         );
     }

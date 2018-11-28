@@ -268,14 +268,11 @@ class Explorer extends Component {
   }
   handleMouseDownContent = (e) => {
     if (e.button===0 && e.target.classList.contains("explorer-content")) {
-      let parentEl =  document.getElementById(this.props.uniqueKey);
       let selectBox = document.getElementById("selectBox");
       if (selectBox) document.getElementById("selectBox").remove();
+      let parentEl =  document.getElementById(this.props.uniqueKey);
       let rect = parentEl.getElementsByClassName("explorer-content")[0].getBoundingClientRect();
-      this.firstPos = {
-        x: e.pageX,
-        y: e.pageY
-      }
+      this.firstPos = {x: e.pageX,y: e.pageY};
       this.drawBoxOffset = rect;
       let icons = parentEl.getElementsByClassName("medium-icon");
       for (let i = 0; i < icons.length; i++) {
