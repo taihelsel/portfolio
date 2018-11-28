@@ -21,8 +21,8 @@
     background-color:white;
     box-shadow: #00000080 0px 2px 20px 2px;
     position: absolute;
-    top:35%;
-    left:35%;
+    top: 23%;
+    left: 23vw;
     border-radius: 4px;
     z-index: 15;
     min-width:375px;

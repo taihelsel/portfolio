@@ -33,9 +33,19 @@ class PopupModal extends Component {
     }
     handleOptionClick = (e) => {
         let choice = e.currentTarget.innerText.toLowerCase();
-        this.props.handleFileViewerOpen(e, this.props.name, this.props.data[choice],choice);
+        if(this.props.data !==null){
+            this.props.handleFileViewerOpen(e, this.props.name, this.props.data[choice],choice);
+        }else if(this.props.name.toLowerCase() === "redirect"){
+            //handling redirect
+            switch(choice){
+                case "yes":
+                    window.location = "https://taihelsel.github.io/portfoliov2";
+                break;
+                case "no":
+                break;
+            }
+        }
         this.handleExplorerClose(null);
-
     }
     render() {
         return (
