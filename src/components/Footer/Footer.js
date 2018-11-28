@@ -28,6 +28,7 @@ class Footer extends Component {
       } else if (x.props.type === "img") {
         iconPath = "icons/img.png";
       } else if (x.type.name === "Explorer") {
+        console.log(x.type);
         iconPath = "icons/folder.png";
       } else {
         iconPath = null;
