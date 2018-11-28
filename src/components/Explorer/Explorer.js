@@ -143,6 +143,7 @@ class Explorer extends Component {
     let el = document.getElementById(this.props.uniqueKey);
     if(el.classList.contains("explorer-minimize")) el.classList.remove("explorer-minimize");
     else  el.classList.add("explorer-minimize");
+    try { document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window"); } catch{ }
   }
   handleExplorerMax = () => {
     let el = document.getElementById(this.props.uniqueKey);
