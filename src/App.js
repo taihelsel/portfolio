@@ -40,7 +40,7 @@ class App extends Component {
     );
   }
   render() {
-    if( window.innerWidth < 500 && Object.keys(this.state.popupModalWindows).length<1)  this.handlePopupModal(null,"Redirect",null,"View mobile version of portfolio?",["Yes","No","No, don't ask again"]);
+    if( window.innerWidth < 500 && Object.keys(this.state.popupModalWindows).length<1)  this.handlePopupModal(null,"Redirect",null,"View mobile version of portfolio?",["Yes","No"]);
     return (
       <div className="App">
         <HomeScreen handleFileViewerOpen={this.handleExplorerOpen} handleExplorerOpen={this.handleExplorerOpen} handlePopupModal={this.handlePopupModal} />
