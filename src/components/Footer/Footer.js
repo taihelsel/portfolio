@@ -42,7 +42,7 @@ class Footer extends Component {
   }
   handleDesktopBtnClick = () => {
     let x = document.getElementsByClassName("explorer");
-    if (document.getElementsByClassName("selected-footer-window")[0]!==null)document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window");
+    if (document.getElementsByClassName("selected-footer-window")[0]!==undefined)document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window");
     for(let i=0;i<x.length;i++){
       if(x[i].classList.contains("explorer-minimize")===false)x[i].classList.add("explorer-minimize");
     }
