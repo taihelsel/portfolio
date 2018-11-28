@@ -26,9 +26,9 @@ class MediumIcon extends Component {
         case "html":
           window.open(this.props.data.content);
           break;
-        default:
-          console.log("need to handle other file types");
-          break;
+        // default:
+        //   console.log("need to handle other file types");
+        //   break;
       }
       this.props.unselectAllIcons();
       this.setState({ clickCount: 0 });

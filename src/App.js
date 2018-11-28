@@ -40,7 +40,6 @@ class App extends Component {
     );
   }
   render() {
-    console.log("explorer",this.allWindows);
     return (
       <div className="App">
         <HomeScreen handleFileViewerOpen={this.handleExplorerOpen} handleExplorerOpen={this.handleExplorerOpen} handlePopupModal={this.handlePopupModal} />
