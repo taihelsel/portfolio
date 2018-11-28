@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "cf5eb3e8a727d66500a5d4dfe17e25d0",
-    "url": "/anesthesia/static/media/2048remake.cf5eb3e8.gif"
+    "revision": "c15247660cc26bbaddc4b1096f10900f",
+    "url": "/anesthesia/static/media/cryptoapp.c1524766.gif"
   },
   {
-    "revision": "73fafc171aba362a45ca",
-    "url": "/anesthesia/static/css/main.8813a59f.chunk.css"
+    "revision": "6d4af960c18438595769",
+    "url": "/anesthesia/static/css/main.3d695229.chunk.css"
   },
   {
-    "revision": "ed5a7db10e33dfae9c2a",
-    "url": "/anesthesia/static/js/1.ed5a7db1.chunk.js"
+    "revision": "9b6d4b049e070e6e2dcc",
+    "url": "/anesthesia/static/js/1.9b6d4b04.chunk.js"
   },
   {
     "revision": "3c01d3415039ec648e8c",
@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/anesthesia/static/media/rightarrow.15cc8a49.svg"
   },
   {
-    "revision": "73fafc171aba362a45ca",
-    "url": "/anesthesia/static/js/main.73fafc17.chunk.js"
+    "revision": "cf5eb3e8a727d66500a5d4dfe17e25d0",
+    "url": "/anesthesia/static/media/2048remake.cf5eb3e8.gif"
   },
   {
-    "revision": "c15247660cc26bbaddc4b1096f10900f",
-    "url": "/anesthesia/static/media/cryptoapp.c1524766.gif"
+    "revision": "6d4af960c18438595769",
+    "url": "/anesthesia/static/js/main.6d4af960.chunk.js"
   },
   {
     "revision": "a4f0614c611001ece220cb08059803c7",
@@ -52,7 +52,15 @@ self.__precacheManifest = [
     "url": "/anesthesia/static/media/sfwclassifier.5c807514.gif"
   },
   {
-    "revision": "8d02d868d514ea362a467ffa956bdede",
+    "revision": "ea09d88939a172182bbfd1c424ff203d",
+    "url": "/anesthesia/static/media/background.ea09d889.jpg"
+  },
+  {
+    "revision": "0400f304abd39a7f03c4bc3db56902e8",
+    "url": "/anesthesia/static/media/chrome.0400f304.png"
+  },
+  {
+    "revision": "7a7ccef2ae6098bc5818246fb5ae5e2c",
     "url": "/anesthesia/index.html"
   }
 ];

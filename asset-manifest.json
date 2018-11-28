@@ -1,9 +1,9 @@
 {
-  "main.css": "/anesthesia/static/css/main.8813a59f.chunk.css",
-  "main.js": "/anesthesia/static/js/main.73fafc17.chunk.js",
-  "main.js.map": "/anesthesia/static/js/main.73fafc17.chunk.js.map",
-  "static/js/1.ed5a7db1.chunk.js": "/anesthesia/static/js/1.ed5a7db1.chunk.js",
-  "static/js/1.ed5a7db1.chunk.js.map": "/anesthesia/static/js/1.ed5a7db1.chunk.js.map",
+  "main.css": "/anesthesia/static/css/main.3d695229.chunk.css",
+  "main.js": "/anesthesia/static/js/main.6d4af960.chunk.js",
+  "main.js.map": "/anesthesia/static/js/main.6d4af960.chunk.js.map",
+  "static/js/1.9b6d4b04.chunk.js": "/anesthesia/static/js/1.9b6d4b04.chunk.js",
+  "static/js/1.9b6d4b04.chunk.js.map": "/anesthesia/static/js/1.9b6d4b04.chunk.js.map",
   "runtime~main.js": "/anesthesia/static/js/runtime~main.3c01d341.js",
   "runtime~main.js.map": "/anesthesia/static/js/runtime~main.3c01d341.js.map",
   "static/media/background2.jpg": "/anesthesia/static/media/background2.89b5fae5.jpg",
@@ -14,9 +14,11 @@
   "static/media/kayt.gif": "/anesthesia/static/media/kayt.d9dc59b3.gif",
   "static/media/restredesign.gif": "/anesthesia/static/media/restredesign.b228d7d4.gif",
   "static/media/sfwclassifier.gif": "/anesthesia/static/media/sfwclassifier.5c807514.gif",
+  "static/media/background.jpg": "/anesthesia/static/media/background.ea09d889.jpg",
+  "static/media/chrome.png": "/anesthesia/static/media/chrome.0400f304.png",
   "static/media/leftarrow.svg": "/anesthesia/static/media/leftarrow.eb17f0a2.svg",
-  "static/css/main.8813a59f.chunk.css.map": "/anesthesia/static/css/main.8813a59f.chunk.css.map",
+  "static/css/main.3d695229.chunk.css.map": "/anesthesia/static/css/main.3d695229.chunk.css.map",
   "index.html": "/anesthesia/index.html",
-  "precache-manifest.dc781034ea781840416e077ecc3bfa2b.js": "/anesthesia/precache-manifest.dc781034ea781840416e077ecc3bfa2b.js",
+  "precache-manifest.fae4c922f20a01050fd5eb13d7928f32.js": "/anesthesia/precache-manifest.fae4c922f20a01050fd5eb13d7928f32.js",
   "service-worker.js": "/anesthesia/service-worker.js"
 }
