@@ -62,6 +62,8 @@
     padding: 0;
     list-style: none;
     user-select: none;
+    max-width: 83%;
+    overflow: hidden;
 }
 .selected-footer-window{
     box-shadow:inset 0px 39px 50px -16px #bdbdbd99!important;
