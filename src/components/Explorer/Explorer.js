@@ -91,11 +91,15 @@ class Explorer extends Component {
     document.getElementById(this.props.uniqueKey).classList.add("selected-explorer");
   }
   handleMouseUp = (e) => {
-    this.firstMoveOffset = null;
-    document.removeEventListener('mousemove', this.moveExplorer);
+    let el = document.getElementById(this.props.uniqueKey);
+    if(el.classList.contains("explorer-fullscreen")===false){
+      this.firstMoveOffset = null;
+      document.removeEventListener('mousemove', this.moveExplorer);
+    }
   }
   handleMouseDown = (e) => {
-    document.addEventListener('mousemove', this.moveExplorer);
+    let el = document.getElementById(this.props.uniqueKey);
+    if(el.classList.contains("explorer-fullscreen")===false)document.addEventListener('mousemove', this.moveExplorer);
   }
   moveExplorer = (e) => {
     let x = moveWindow(e, this.props.uniqueKey, this.firstMoveOffset);
@@ -134,7 +138,9 @@ class Explorer extends Component {
     console.log("minimize clicked");
   }
   handleExplorerMax = () => {
-    console.log("maximize clicked");
+    let el = document.getElementById(this.props.uniqueKey);
+    if(el.classList.contains("explorer-fullscreen")) el.classList.remove("explorer-fullscreen");
+    else  el.classList.add("explorer-fullscreen");
   }
   handleExplorerClose = (e) => {
     this.props.handleClose(e, this.props.uniqueKey);

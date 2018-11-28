@@ -1,6 +1,6 @@
 #HomeScreen{
     width:100%;
-    height: 96.6%;
+    height: calc(100% - 37px);
     background-size: cover;
     background-position: center;
     position: relative;
