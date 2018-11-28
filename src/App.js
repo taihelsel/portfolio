@@ -16,6 +16,7 @@ class App extends Component {
       popupModalWindows: {},
       fileViewerWindows: {},
     };
+    this.allWindows=[]
   }
   //handle new windows
   handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
@@ -27,20 +28,24 @@ class App extends Component {
   handlePopupModalClose = (e, key) => this.setState({ popupModalWindows: handleWindowClose(e, key, { ...this.state.popupModalWindows }) });
   closeAllExplorers = () => this.setState({ explorerWindows: {} });
   renderAllWindows = () => {
+    let x = [];
+    Object.values(this.state.explorerWindows).map(item => x.push(item));
+    Object.values(this.state.fileViewerWindows).map(item => x.push(item));
+    Object.values(this.state.popupModalWindows).map(item => x.push(item));
+    this.allWindows = x;
     return (
       <div>
-        {Object.values(this.state.explorerWindows).map(item => item)}
-        {Object.values(this.state.fileViewerWindows).map(item => item)}
-        {Object.values(this.state.popupModalWindows).map(item => item)}
+        {x}
       </div>
     );
   }
   render() {
+    console.log("explorer",this.allWindows);
     return (
       <div className="App">
         <HomeScreen handleFileViewerOpen={this.handleExplorerOpen} handleExplorerOpen={this.handleExplorerOpen} handlePopupModal={this.handlePopupModal} />
         {this.renderAllWindows()}
-        <Footer explorerWindows={this.state.explorerWindows} popupModalWindows={this.state.popupModalWindows} fileViewerWindows={this.state.fileViewerWindows}/>
+        <Footer handleExplorerOpen={this.handleExplorerOpen} activeWindows={this.allWindows}/>
       </div>
     );
   }

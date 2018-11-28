@@ -4,6 +4,9 @@
 .selected-explorer #selectedBox{
     z-index: 1001;
 }
+.explorer-minimize{
+    display:none!important;
+}
 .explorer-fullscreen{
     width:100%!important;
     height:calc(100% - 37px)!important;

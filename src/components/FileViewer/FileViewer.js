@@ -14,6 +14,11 @@ class FileViewer extends Component {
     setAsActiveExplorer = () => {
         try { document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer"); } catch{ }
         document.getElementById(this.props.uniqueKey).classList.add("selected-explorer");
+        let footerTab = document.getElementById("footer-tab-"+this.props.uniqueKey);
+        if(footerTab !== null){
+          try { document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window"); } catch{ }
+          footerTab.classList.add("selected-footer-window");
+        }
     }
     handleMouseUp = (e) => {
         let el = document.getElementById(this.props.uniqueKey);
@@ -30,6 +35,11 @@ class FileViewer extends Component {
         let x = moveWindow(e, this.props.uniqueKey, this.firstMoveOffset);
         if (x !== null) this.firstMoveOffset = x;
     }
+    handleExplorerMin = () => {
+        let el = document.getElementById(this.props.uniqueKey);
+        if(el.classList.contains("explorer-minimize")) el.classList.remove("explorer-minimize");
+        else  el.classList.add("explorer-minimize");
+      }
     handleExplorerMax = () => {
         let el = document.getElementById(this.props.uniqueKey);
         if(el.classList.contains("explorer-fullscreen")) el.classList.remove("explorer-fullscreen");

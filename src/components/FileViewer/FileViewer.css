@@ -5,6 +5,9 @@
     left:0!important;
     min-height: unset!important;
 }
+.explorer-minimize{
+    display:none!important;
+}
 .file-viewer-head{
     height:36px!important;
 }

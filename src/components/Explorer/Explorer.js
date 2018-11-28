@@ -89,6 +89,11 @@ class Explorer extends Component {
       document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer");
     } catch{ }
     document.getElementById(this.props.uniqueKey).classList.add("selected-explorer");
+    let footerTab = document.getElementById("footer-tab-"+this.props.uniqueKey);
+    if(footerTab !== null){
+      try { document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window"); } catch{ }
+      footerTab.classList.add("selected-footer-window");
+    }
   }
   handleMouseUp = (e) => {
     let el = document.getElementById(this.props.uniqueKey);
@@ -135,7 +140,9 @@ class Explorer extends Component {
     }
   }
   handleExplorerMin = () => {
-    console.log("minimize clicked");
+    let el = document.getElementById(this.props.uniqueKey);
+    if(el.classList.contains("explorer-minimize")) el.classList.remove("explorer-minimize");
+    else  el.classList.add("explorer-minimize");
   }
   handleExplorerMax = () => {
     let el = document.getElementById(this.props.uniqueKey);
@@ -290,6 +297,11 @@ class Explorer extends Component {
   }
   handleDrawBox = (e) => drawBox(e, true,this.props.uniqueKey, this.firstPos, this.iconLocations,this.drawBoxOffset);
   render() {
+    //gonna do this reeeeeeeeeeall sloppy need to update after working
+    let footerTab = document.getElementById("footer-tab-"+this.props.uniqueKey);
+    if(footerTab !== null){
+      footerTab.getElementsByClassName("footer-tab-name")[0].textContent = this.state.name;
+    }
     return (
       <div id={this.props.uniqueKey} className="explorer" onMouseDown={this.setAsActiveExplorer} onClick={this.handleExplorerClick}>
         <div className="explorer-head">
