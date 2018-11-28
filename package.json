@@ -2,7 +2,7 @@
   "name": "anesthesia",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://taihelsel.github.io/anesthesia",
+  "homepage": "http://taihelsel.github.io/portfolio",
   "dependencies": {
     "gh-pages": "^1.2.0",
     "react": "^16.6.0",
