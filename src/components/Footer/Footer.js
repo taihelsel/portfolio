@@ -39,7 +39,13 @@ class Footer extends Component {
         </li>
       )
     }
-
+  }
+  handleDesktopBtnClick = () => {
+    let x = document.getElementsByClassName("explorer");
+    if (document.getElementsByClassName("selected-footer-window")[0]!==null)document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window");
+    for(let i=0;i<x.length;i++){
+      if(x[i].classList.contains("explorer-minimize")===false)x[i].classList.add("explorer-minimize");
+    }
   }
   render() {
     return (
@@ -50,7 +56,7 @@ class Footer extends Component {
             <h3 className="nav-item-text">Menu</h3>
           </li>
           <li className="nav-item">
-            <img className="nav-item-icon" src={require("../.././media/icons/user-desktop.png")} alt="Desktop shortcut" />
+            <img className="nav-item-icon" src={require("../.././media/icons/user-desktop.png")} alt="Desktop shortcut" onClick={this.handleDesktopBtnClick}/>
           </li>
           <li className="nav-item">
             <img className="nav-item-app-icon" src={require("../.././media/icons/folder.png")} alt="Folder Logo" onClick={this.handleFolderIconClick} />

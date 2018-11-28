@@ -324,10 +324,10 @@ class Explorer extends Component {
               <h3 className="explorer-settings-label" onClick={this.showDropDown}>Go</h3>
               {this.shouldDropdownRender("go")}
             </li>
-            <li>
+            {/* <li>
               <h3 className="explorer-settings-label" onClick={this.showDropDown}>Help</h3>
               {this.shouldDropdownRender("help")}
-            </li>
+            </li> */}
           </ul>
           <div className="explorer-nav">
             <div onClick={this.handleBackArrowClick} className={this.state.backArrow.length > 0 ? "" : "explorer-nav-disabled"}>
