@@ -25,7 +25,7 @@
     user-select: none;
 }
 .nav-item:nth-child(3){
-    margin-left:5px;
+    margin-left:2px;
 }
 .nav-item-icon{
     width:23px;
@@ -34,10 +34,10 @@
     display: inline-flex;
 }
 .nav-item-app-icon{
-    width:30px;
-    height: 30px;
-    padding: 2px 0px;
+    width: 25px;
     display: inline-flex;
+    height: 25px;
+    margin-top: 3px;
 }
 .nav-item-app-icon:hover,.nav-item-icon:hover{
     box-shadow: inset snow 0px -6px 22px -12px;
