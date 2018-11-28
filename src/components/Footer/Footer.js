@@ -9,32 +9,38 @@ class Footer extends Component {
   handleFooterTabClick = (e, key) => {
     let el = document.getElementById(key);
     try { document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window"); } catch{ }
-    e.currentTarget.classList.add("selected-footer-window");
+
     if (el.classList.contains("selected-explorer")) {
-      if (el.classList.contains("explorer-minimize")) el.classList.remove("explorer-minimize");
-      else el.classList.add("explorer-minimize");
+      if (el.classList.contains("explorer-minimize")) {
+        el.classList.remove("explorer-minimize");
+        e.currentTarget.classList.add("selected-footer-window");
+      }
+      else {
+        el.classList.add("explorer-minimize");
+      }
     } else {
       try { document.getElementsByClassName("selected-explorer")[0].classList.remove("selected-explorer"); } catch{ }
       if (el.classList.contains("explorer-minimize")) el.classList.remove("explorer-minimize");
       el.classList.add("selected-explorer");
+      e.currentTarget.classList.add("selected-footer-window");
     }
 
   }
   handleFooterTabs = (x) => {
     let iconPath = null;
-    if (typeof x !== "undefined"&& typeof x.props.type!=="undefined") {
-      switch(x.props.type.toLowerCase()){
+    if (typeof x !== "undefined" && typeof x.props.type !== "undefined") {
+      switch (x.props.type.toLowerCase()) {
         case "txt":
         case "text":
         case "pdf":
-        iconPath = "icons/text.png";
-        break;
+          iconPath = "icons/text.png";
+          break;
         case "img":
-        iconPath = "icons/img.png";
-        break;
+          iconPath = "icons/img.png";
+          break;
         case "explorer":
-        iconPath = "icons/folder.png";
-        break;
+          iconPath = "icons/folder.png";
+          break;
       }
       return (
         <li id={"footer-tab-" + x.props.uniqueKey} onClick={(e) => { this.handleFooterTabClick(e, x.props.uniqueKey) }}>
@@ -46,9 +52,9 @@ class Footer extends Component {
   }
   handleDesktopBtnClick = () => {
     let x = document.getElementsByClassName("explorer");
-    if (document.getElementsByClassName("selected-footer-window")[0]!==undefined)document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window");
-    for(let i=0;i<x.length;i++){
-      if(x[i].classList.contains("explorer-minimize")===false)x[i].classList.add("explorer-minimize");
+    if (document.getElementsByClassName("selected-footer-window")[0] !== undefined) document.getElementsByClassName("selected-footer-window")[0].classList.remove("selected-footer-window");
+    for (let i = 0; i < x.length; i++) {
+      if (x[i].classList.contains("explorer-minimize") === false) x[i].classList.add("explorer-minimize");
     }
   }
   render() {
@@ -60,7 +66,7 @@ class Footer extends Component {
             <h3 className="nav-item-text">Menu</h3>
           </li>
           <li className="nav-item">
-            <img className="nav-item-icon" src={require("../.././media/icons/user-desktop.png")} alt="Desktop shortcut" onClick={this.handleDesktopBtnClick}/>
+            <img className="nav-item-icon" src={require("../.././media/icons/user-desktop.png")} alt="Desktop shortcut" onClick={this.handleDesktopBtnClick} />
           </li>
           <li className="nav-item">
             <img className="nav-item-app-icon" src={require("../.././media/icons/folder.png")} alt="Folder Logo" onClick={this.handleFolderIconClick} />
