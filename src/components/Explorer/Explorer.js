@@ -257,7 +257,7 @@ class Explorer extends Component {
   renderNewExplorer = () => this.props.handleExplorerOpen(null, this.state.name, this.state.data);
   renderDesktop = () => this.setState({ data: HomeData, name: "Desktop", backArrow: [], forwardArrow: [], });
   renderProjects = () => this.setState({ data: HomeData[0].content, name: "Projects", backArrow: [], forwardArrow: [] });
-  renderResume = () => this.props.handlePopupModal(null, HomeData[1].name, HomeData[1].content, "View file as", ["text", "pdf"]);
+  renderResume = () => this.props.handlePopupModal(null, HomeData[1].name, HomeData[1].content, "View file as", ["txt", "pdf"]);
   renderLinkedIn = () => window.open("https://www.linkedin.com/in/taihelsel/");
   renderGitHub = () => window.open("https://github.com/taihelsel");
 
