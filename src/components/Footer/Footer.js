@@ -22,18 +22,19 @@ class Footer extends Component {
   }
   handleFooterTabs = (x) => {
     let iconPath = null;
-    if(x.type.name !== undefined){
-      console.log(x.type.name);
-    }
-    if (typeof x !== "undefined") {
-      if (x.props.type === "text" || x.props.type === "txt" || x.props.type === "pdf") {
+    if (typeof x !== "undefined"&& typeof x.props.type!=="undefined") {
+      switch(x.props.type.toLowerCase()){
+        case "txt":
+        case "text":
+        case "pdf":
         iconPath = "icons/text.png";
-      } else if (x.props.type === "img") {
+        break;
+        case "img":
         iconPath = "icons/img.png";
-      } else if (x.type.name === "Explorer") {
+        break;
+        case "explorer":
         iconPath = "icons/folder.png";
-      } else {
-        iconPath = null;
+        break;
       }
       return (
         <li id={"footer-tab-" + x.props.uniqueKey} onClick={(e) => { this.handleFooterTabClick(e, x.props.uniqueKey) }}>
