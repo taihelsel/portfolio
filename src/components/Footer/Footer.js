@@ -22,13 +22,13 @@ class Footer extends Component {
   }
   handleFooterTabs = (x) => {
     let iconPath = null;
+    console.log(x.type.name);
     if (typeof x !== "undefined") {
       if (x.props.type === "text" || x.props.type === "txt" || x.props.type === "pdf") {
         iconPath = "icons/text.png";
       } else if (x.props.type === "img") {
         iconPath = "icons/img.png";
       } else if (x.type.name === "Explorer") {
-        console.log(x.type);
         iconPath = "icons/folder.png";
       } else {
         iconPath = null;
