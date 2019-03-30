@@ -4,12 +4,12 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/cryptoapp.c1524766.gif"
   },
   {
-    "revision": "1aeae9cf4348fd75a552",
-    "url": "/portfolio/static/css/main.aac935db.chunk.css"
+    "revision": "d76b5791e989388b433e",
+    "url": "/portfolio/static/css/main.fba14b5f.chunk.css"
   },
   {
-    "revision": "9b6d4b049e070e6e2dcc",
-    "url": "/portfolio/static/js/1.9b6d4b04.chunk.js"
+    "revision": "07ab7071538b1a9c41d9",
+    "url": "/portfolio/static/js/1.07ab7071.chunk.js"
   },
   {
     "revision": "ee2a100325fd284f0097",
@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/2048remake.cf5eb3e8.gif"
   },
   {
-    "revision": "1aeae9cf4348fd75a552",
-    "url": "/portfolio/static/js/main.1aeae9cf.chunk.js"
+    "revision": "d76b5791e989388b433e",
+    "url": "/portfolio/static/js/main.d76b5791.chunk.js"
   },
   {
     "revision": "a4f0614c611001ece220cb08059803c7",
@@ -52,6 +52,10 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/sfwclassifier.5c807514.gif"
   },
   {
+    "revision": "d59631e04654c15add45e31c4f4550dd",
+    "url": "/portfolio/static/media/soundclout.d59631e0.gif"
+  },
+  {
     "revision": "ea09d88939a172182bbfd1c424ff203d",
     "url": "/portfolio/static/media/background.ea09d889.jpg"
   },
@@ -60,7 +64,7 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/chrome.0400f304.png"
   },
   {
-    "revision": "e100744067954a88780180b9ff8a4016",
+    "revision": "b6650635c5fe1edf6328a42534750262",
     "url": "/portfolio/index.html"
   }
 ];
