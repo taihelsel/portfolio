@@ -18,6 +18,16 @@ class App extends Component {
     };
     this.allWindows = []
   }
+  componentWillMount() {
+    this.handleCacheReload();
+  }
+  handleCacheReload() {
+    const dayToMS = 86400000;
+    if (localStorage.getItem("lastDumped") === null || parseInt(localStorage.getItem("lastDumped")) < Date.now() - dayToMS) {
+      localStorage.setItem("lastDumped", Date.now());
+      window.location.reload(true);
+    }
+  }
   //handle new windows
   handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { type: "explorer", handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
   handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
