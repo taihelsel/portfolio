@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/cryptoapp.c1524766.gif"
   },
   {
-    "revision": "d76b5791e989388b433e",
+    "revision": "302d394daf7ad977d214",
     "url": "/portfolio/static/css/main.fba14b5f.chunk.css"
   },
   {
@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/2048remake.cf5eb3e8.gif"
   },
   {
-    "revision": "d76b5791e989388b433e",
-    "url": "/portfolio/static/js/main.d76b5791.chunk.js"
+    "revision": "302d394daf7ad977d214",
+    "url": "/portfolio/static/js/main.302d394d.chunk.js"
   },
   {
     "revision": "a4f0614c611001ece220cb08059803c7",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/portfolio/static/media/chrome.0400f304.png"
   },
   {
-    "revision": "b6650635c5fe1edf6328a42534750262",
+    "revision": "4c78c6f98c2da72e5c411f205485ec12",
     "url": "/portfolio/index.html"
   }
 ];
