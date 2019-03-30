@@ -19,9 +19,9 @@ class App extends Component {
     this.allWindows = []
   }
   componentWillMount() {
-    this.handleCacheReload();
+    this.handleCacheDump();
   }
-  handleCacheReload() {
+  handleCacheDump() {
     const dayToMS = 86400000;
     if (localStorage.getItem("lastDumped") === null || parseInt(localStorage.getItem("lastDumped")) < Date.now() - dayToMS) {
       localStorage.setItem("lastDumped", Date.now());
