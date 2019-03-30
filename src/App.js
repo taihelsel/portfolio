@@ -16,10 +16,10 @@ class App extends Component {
       popupModalWindows: {},
       fileViewerWindows: {},
     };
-    this.allWindows=[]
+    this.allWindows = []
   }
   //handle new windows
-  handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { type:"explorer", handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
+  handleExplorerOpen = (e, name, data) => this.setState({ explorerWindows: handleWindowOpen(e, name, data, { ...this.state.explorerWindows }, <Explorer />, { type: "explorer", handlePopupModal: this.handlePopupModal, handleFileViewerOpen: this.handleFileViewerOpen, handleExplorerOpen: this.handleExplorerOpen, closeAllExplorers: this.closeAllExplorers, handleClose: this.handleExplorerClose }) });
   handleFileViewerOpen = (e, name, data, type) => this.setState({ fileViewerWindows: handleWindowOpen(e, name, data, { ...this.state.fileViewerWindows }, <FileViewer />, { handleClose: this.handleFileViewerClose, type: type }) });
   handlePopupModal = (e, name, data, question, options) => this.setState({ popupModalWindows: handleWindowOpen(e, name, data, { ...this.state.popupModalWindows }, <PopupModal />, { handleFileViewerOpen: this.handleFileViewerOpen, handleTextDocClick: this.handleTextDocClick, handleClose: this.handlePopupModalClose, options: options, question: question }) });
   //handle closing old windows
@@ -40,12 +40,12 @@ class App extends Component {
     );
   }
   render() {
-    if( window.innerWidth < 500 && Object.keys(this.state.popupModalWindows).length<1)  this.handlePopupModal(null,"Redirect",null,"View mobile version of portfolio?",["Yes","No"]);
+    if (window.innerWidth < 500 && Object.keys(this.state.popupModalWindows).length < 1) this.handlePopupModal(null, "Redirect", null, "View mobile version of portfolio?", ["Yes", "No"]);
     return (
       <div className="App">
         <HomeScreen handleFileViewerOpen={this.handleExplorerOpen} handleExplorerOpen={this.handleExplorerOpen} handlePopupModal={this.handlePopupModal} />
         {this.renderAllWindows()}
-        <Footer handleExplorerOpen={this.handleExplorerOpen} activeWindows={this.allWindows}/>
+        <Footer handleExplorerOpen={this.handleExplorerOpen} activeWindows={this.allWindows} />
       </div>
     );
   }
